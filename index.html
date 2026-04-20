@@ -106,77 +106,37 @@ nav.scrolled .nav-cta { background: var(--accent) !important; color: var(--bg) !
 /* ── HERO ── */
 .hero {
   position: relative; min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 48px 64px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 48px;
   overflow: hidden;
 }
 
-/* Scan lines */
-.hero-scanlines {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  overflow: hidden;
-}
-.hero-scanlines::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(16,185,129,0.012) 3px, rgba(16,185,129,0.012) 4px);
-}
-.hero-scanlines::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 30%, var(--bg) 100%);
-}
-
-/* Data lines */
-.hero-lines {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-}
-.hero-line {
-  position: absolute; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(16,185,129,0.06) 20%, rgba(16,185,129,0.12) 50%, rgba(16,185,129,0.06) 80%, transparent);
-  animation: linePulse var(--d, 6s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-}
-@keyframes linePulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-
-.hero-corner {
-  position: absolute; top: calc(var(--nav-h) + 24px); right: 48px;
-  font-family: var(--mono); font-size: 10px; color: var(--dim2);
-  letter-spacing: 0.1em; line-height: 1.8; text-align: right;
-  z-index: 2;
-  opacity: 0; animation: fadeUp 0.8s 0.8s var(--ease) forwards;
-}
-.hero-corner span { display: block; }
-.hero-corner .hi { color: var(--dim); }
-
-.hero-inner { position: relative; z-index: 2; }
+.hero-inner { position: relative; z-index: 2; max-width: 1100px; }
 
 .hero-sys {
   font-family: var(--mono); font-size: 10px; color: var(--dim);
   letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 24px; display: flex; align-items: center; gap: 16px;
-  opacity: 0; animation: fadeUp 0.7s 0.2s var(--ease) forwards;
+  margin-bottom: 32px; display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.7s 0.15s var(--ease) forwards;
 }
-.sys-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2.5s ease-in-out infinite; }
+.sys-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.5s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
 
 .hero h1 {
   font-family: var(--syne);
-  font-size: clamp(52px, 8.5vw, 124px);
-  font-weight: 800; line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin-bottom: 40px;
-  opacity: 0; animation: fadeUp 0.9s 0.3s var(--ease) forwards;
+  font-size: clamp(56px, 9vw, 130px);
+  font-weight: 800; line-height: 0.93;
+  letter-spacing: -0.035em;
+  margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 0.9s 0.28s var(--ease) forwards;
 }
 .hero h1 .line2 { display: block; color: var(--accent); }
 .hero h1 .line3 { display: block; }
 
-.hero-bottom {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.8s 0.55s var(--ease) forwards;
+.hero-ctas {
+  display: flex; gap: 20px; align-items: center;
+  opacity: 0; animation: fadeUp 0.8s 0.45s var(--ease) forwards;
 }
-.hero-desc { font-size: 14px; color: var(--dim); max-width: 320px; line-height: 1.75; font-weight: 300; }
-.hero-ctas { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
 .btn-p {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--accent); color: var(--bg);
@@ -190,29 +150,17 @@ nav.scrolled .nav-cta { background: var(--accent) !important; color: var(--bg) !
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--dim); font-size: 12px; font-family: var(--mono);
   text-decoration: none; letter-spacing: 0.06em;
-  transition: color 0.2s; padding: 13px 0;
+  transition: color 0.2s;
 }
 .btn-g:hover { color: var(--accent); }
-
-/* Hero stats bar */
-.hero-stats-bar {
-  margin-top: 56px; padding-top: 28px;
-  border-top: 1px solid var(--border);
-  display: flex; gap: 0;
-  opacity: 0; animation: fadeUp 0.7s 0.7s var(--ease) forwards;
-}
-.hstat { flex: 1; padding-right: 32px; position: relative; }
-.hstat + .hstat { padding-left: 32px; padding-right: 32px; border-left: 1px solid var(--border); }
-.hstat-val { font-family: var(--syne); font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 6px; }
-.hstat-label { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; line-height: 1.4; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Scroll cue */
 .scroll-cue {
-  position: absolute; right: 48px; bottom: 64px; z-index: 2;
+  position: absolute; right: 48px; bottom: 48px; z-index: 2;
   display: flex; flex-direction: column; align-items: center; gap: 6px;
-  opacity: 0; animation: fadeUp 0.7s 1s var(--ease) forwards;
+  opacity: 0; animation: fadeUp 0.7s 0.9s var(--ease) forwards;
 }
 .scroll-cue span { font-family: var(--mono); font-size: 9px; color: var(--dim2); letter-spacing: 0.15em; text-transform: uppercase; writing-mode: vertical-lr; }
 .scroll-cue-line { width: 1px; height: 40px; background: linear-gradient(var(--accent), transparent); }
@@ -523,42 +471,19 @@ footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); le
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-scanlines"></div>
-  <div class="hero-lines">
-    <div class="hero-line" style="top:22%;--d:7s;--delay:0s"></div>
-    <div class="hero-line" style="top:38%;--d:9s;--delay:1.5s"></div>
-    <div class="hero-line" style="top:61%;--d:6s;--delay:0.8s"></div>
-    <div class="hero-line" style="top:78%;--d:8s;--delay:2.2s"></div>
-  </div>
-  <div class="hero-corner">
-    <span class="hi">SYS.STATUS</span>
-    <span>DISPONIBLE</span>
-    <span class="hi">BASE</span>
-    <span>LILLE, FR</span>
-    <span class="hi">MISSIONS</span>
-    <span>FRANCE</span>
-  </div>
   <div class="hero-inner">
     <div class="hero-sys">
       <div class="sys-dot"></div>
-      <span>Automatisation sur mesure · Disponible</span>
+      <span>Disponible · Lille, France</span>
     </div>
     <h1>
       J'automatise<br>
       <span class="line2 scramble">vos processus</span>
       <span class="line3">répétitifs.</span>
     </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">Outils sur-mesure pour récupérer le temps perdu sur les tâches manuelles. Basé à Lille, missions en France.</p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-p">Audit gratuit — 30 min</a>
-        <a href="#painpoints" class="btn-g">C'est pour moi ? →</a>
-      </div>
-    </div>
-    <div class="hero-stats-bar">
-      <div class="hstat"><div class="hstat-val">4+</div><div class="hstat-label">outils livrés</div></div>
-      <div class="hstat"><div class="hstat-val">48h</div><div class="hstat-label">pour une proposition</div></div>
-      <div class="hstat"><div class="hstat-val">0€</div><div class="hstat-label">pour l'audit express</div></div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-p">Audit gratuit — 30 min</a>
+      <a href="#painpoints" class="btn-g">C'est pour moi ? →</a>
     </div>
   </div>
   <div class="scroll-cue"><span>scroll</span><div class="scroll-cue-line"></div></div>
@@ -851,9 +776,9 @@ footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); le
         </div>
         <div class="avail-badge"><div class="avail-dot"></div>Disponible · Réponse sous 24h en semaine</div>
         <div class="ci-links">
-          <a href="mailto:ayoub.aitnacer@edu.edhec.com" class="ci-link">
+          <a href="/cdn-cgi/l/email-protection#93f2eafce6f1bdf2fae7fdf2f0f6e1d3f6f7e6bdf6f7fbf6f0bdf0fcfe" class="ci-link">
             <div class="ci-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6b72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 7 10 7 10-7"/></svg></div>
-            <div><div class="cl-name">Email</div><div class="cl-val">ayoub.aitnacer@edu.edhec.com</div></div>
+            <div><div class="cl-name">Email</div><div class="cl-val"><span class="__cf_email__" data-cfemail="4a2b33253f28642b233e242b292f380a2f2e3f642f2e222f2964292527">[email&#160;protected]</span></div></div>
           </a>
           <a href="https://www.linkedin.com/in/ayoubaitnacer/" target="_blank" rel="noopener" class="ci-link">
             <div class="ci-link-icon"><svg viewBox="0 0 24 24" fill="#6b6b72"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
@@ -888,7 +813,7 @@ footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); le
   <small>© 2026 · Automatisation sur mesure — Lille, France</small>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
 // ── CURSOR ──
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
