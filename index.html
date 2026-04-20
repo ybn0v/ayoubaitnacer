@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayoub Ait Nacer — Automatisation sur mesure</title>
+<meta name="description" content="J'automatise les tâches répétitives des dirigeants et entrepreneurs. Outils web sur mesure, livrés en jours. Basé à Lille, missions en France.">
+<meta property="og:title" content="Ayoub Ait Nacer — Automatisation sur mesure">
+<meta property="og:description" content="J'automatise les tâches répétitives des dirigeants et entrepreneurs. Outils sur-mesure pour récupérer le temps perdu sur les processus manuels.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--surface:#141414;--card:#1a1a1a;--border:#262626;
+  --text:#e8e6e1;--dim:#8a9189;--accent:#10b981;--accent2:#059669;
+  --glow:rgba(16,185,129,.12);--glow2:rgba(16,185,129,.06);
+  --nav-h:65px;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Outfit',-apple-system,sans-serif;
+  --mono:'Space Mono',monospace;
+}
+html{font-size:16px;scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.03;
+}
+
+/* Focus visible global */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+.cursor-glow{
+  position:fixed;width:500px;height:500px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,var(--glow) 0%,transparent 70%);
+  transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  padding:0 48px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(10,10,10,.6);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04);
+}
+.nav-logo{font-family:var(--serif);font-size:20px;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13px;color:var(--dim);text-decoration:none;transition:color .2s;font-weight:500;letter-spacing:.3px}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{
+  background:var(--accent);color:var(--bg) !important;padding:10px 24px;border-radius:100px;
+  font-weight:600;font-size:13px;text-decoration:none;transition:all .2s;
+}
+.nav-cta:hover{box-shadow:0 0 30px var(--glow);transform:scale(1.03)}
+
+/* Mobile burger */
+.nav-burger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:6px;border:none;background:none;
+}
+.nav-burger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;display:block}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mobile-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:99;
+  background:rgba(10,10,10,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);padding:24px;
+  flex-direction:column;gap:4px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-size:16px;color:var(--dim);text-decoration:none;padding:14px 16px;
+  border-radius:10px;transition:all .2s;font-weight:500;
+}
+.mobile-menu a:hover{color:var(--accent);background:var(--glow2)}
+.mobile-menu .mob-cta{
+  margin-top:8px;background:var(--accent);color:var(--bg) !important;
+  text-align:center;font-weight:600;border-radius:10px;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:140px 48px 80px;position:relative;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(16,185,129,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.03) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 20%,transparent 100%);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);border-radius:100px;
+  padding:8px 20px;margin-bottom:32px;width:fit-content;
+}
+.hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+.hero-badge span{font-size:12px;color:var(--dim);font-weight:500;letter-spacing:.5px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(42px,6.5vw,82px);line-height:1.05;
+  max-width:900px;margin-bottom:28px;font-weight:400;letter-spacing:-.02em;
+}
+.hero h1 .accent{color:var(--accent);font-style:italic}
+.hero-desc{
+  font-size:18px;color:var(--dim);max-width:520px;line-height:1.7;
+  margin-bottom:44px;font-weight:300;
+}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:var(--bg);padding:16px 36px;border-radius:100px;
+  font-weight:600;font-size:15px;text-decoration:none;transition:all .25s;
+}
+.btn-primary:hover{box-shadow:0 0 40px var(--glow);transform:translateY(-2px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--dim);font-size:14px;text-decoration:none;font-weight:500;transition:color .2s;
+}
+.btn-secondary:hover{color:var(--accent)}
+.stats{
+  display:flex;gap:0;margin-top:80px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.stat{flex:1;padding:28px 32px;border-right:1px solid var(--border);transition:background .3s}
+.stat:last-child{border-right:none}
+.stat:hover{background:var(--glow2)}
+.stat-num{font-size:32px;font-weight:700;color:var(--accent);font-family:var(--mono);margin-bottom:4px}
+.stat-label{font-size:12px;color:var(--dim);font-weight:500;letter-spacing:.5px}
+
+/* ── SECTIONS ── */
+section{padding:100px 48px}
+.section-tag{
+  font-family:var(--mono);font-size:11px;color:var(--accent);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-heading{
+  font-family:var(--serif);font-size:clamp(32px,4vw,52px);line-height:1.15;
+  max-width:700px;margin-bottom:20px;letter-spacing:-.01em;
+}
+.section-sub{font-size:16px;color:var(--dim);max-width:500px;line-height:1.7;margin-bottom:56px;font-weight:300}
+
+/* ── SERVICES ── */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:16px;overflow:hidden}
+.service{
+  background:var(--surface);padding:44px 36px;position:relative;transition:all .35s;cursor:default;
+}
+.service:hover{background:var(--card)}
+.service:hover .service-num{color:var(--accent)}
+.service:hover .service-arrow{opacity:1;transform:translateX(0)}
+.service-num{
+  font-family:var(--mono);font-size:48px;font-weight:700;
+  color:var(--border);transition:color .35s;line-height:1;margin-bottom:24px;
+}
+.service-icon{
+  width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:20px;
+  background:linear-gradient(135deg,var(--glow),transparent);border:1px solid var(--border);
+}
+.service h3{font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+.service-price{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:14px}
+.service p{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:24px;font-weight:300}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.service-tag{
+  font-size:11px;padding:5px 12px;border-radius:100px;
+  background:rgba(16,185,129,.08);color:var(--accent);font-weight:500;
+  border:1px solid rgba(16,185,129,.15);
+}
+.service-list{font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:24px;font-weight:300;padding-left:16px}
+.service-list li{margin-bottom:4px}
+.service-arrow{
+  position:absolute;top:40px;right:36px;font-size:18px;color:var(--accent);
+  opacity:0;transform:translateX(-8px);transition:all .35s;
+}
+
+/* ── CAS CLIENT ── */
+.case-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.case-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:48px;max-width:800px;
+}
+.case-card h3{font-family:var(--serif);font-size:24px;margin-bottom:8px}
+.case-card-link{
+  font-size:13px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  margin-bottom:24px;font-weight:500;
+}
+.case-card-link:hover{text-decoration:underline}
+.case-card-intro{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:24px;font-weight:300}
+.case-card-list{font-size:14px;color:var(--dim);line-height:1.8;margin-bottom:28px;font-weight:300;padding-left:20px}
+.case-card-list li{margin-bottom:8px}
+.case-card-result{
+  padding:20px 24px;border-radius:10px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.1);
+}
+.case-card-result-label{font-size:10px;font-family:var(--mono);color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.case-card-result p{font-size:14px;color:var(--dim);line-height:1.7;margin:0;font-weight:400}
+
+/* ── PRICING ── */
+.pricing-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pricing-rows{display:flex;flex-direction:column;gap:2px;background:var(--border);border-radius:16px;overflow:hidden;max-width:720px}
+.pricing-row{
+  background:var(--surface);padding:28px 36px;display:flex;align-items:center;
+  justify-content:space-between;gap:24px;transition:background .25s;
+}
+.pricing-row:hover{background:var(--card)}
+.pricing-row-title{font-size:16px;font-weight:600;margin-bottom:4px}
+.pricing-row-desc{font-size:13px;color:var(--dim);font-weight:300;line-height:1.5}
+.pricing-row-price{
+  font-family:var(--mono);font-size:15px;color:var(--accent);
+  white-space:nowrap;text-align:right;flex-shrink:0;
+}
+.pricing-note{
+  margin-top:28px;font-size:14px;color:var(--dim);line-height:1.7;
+  max-width:600px;font-style:italic;font-weight:300;
+}
+@media(max-width:600px){
+  .pricing-row{flex-direction:column;align-items:flex-start;gap:10px}
+  .pricing-row-price{text-align:left}
+}
+
+/* ── ABOUT ── */
+.about-section{position:relative}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.about-visual{
+  position:relative;overflow:hidden;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;justify-content:center;padding:60px 48px;
+}
+.about-visual-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(16,185,129,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.05) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.about-quote{
+  font-family:var(--serif);font-size:28px;font-style:italic;line-height:1.4;
+  position:relative;z-index:1;max-width:400px;
+}
+.about-quote::before{
+  content:'\201C';font-size:120px;font-family:var(--serif);color:var(--accent);
+  opacity:.2;position:absolute;top:-50px;left:-20px;line-height:1;
+}
+.about-quote-author{
+  margin-top:24px;font-size:13px;color:var(--dim);font-family:var(--mono);
+  letter-spacing:1px;position:relative;z-index:1;
+}
+.about-content{padding:60px 48px;display:flex;flex-direction:column;justify-content:center}
+.about-content h3{font-family:var(--serif);font-size:36px;margin-bottom:28px}
+.about-content p{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:16px;font-weight:300}
+.about-timeline{display:flex;flex-direction:column;margin-top:28px;border-left:2px solid var(--border);padding-left:24px}
+.about-step{position:relative;padding:12px 0}
+.about-step::before{
+  content:'';position:absolute;left:-29px;top:18px;width:10px;height:10px;
+  border-radius:50%;background:var(--bg);border:2px solid var(--accent);
+}
+.about-step-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.about-step-text{font-size:13px;color:var(--text);font-weight:400}
+
+/* ── CONTACT ── */
+.contact-section{padding:100px 48px;position:relative}
+.contact-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,var(--glow),transparent);
+  pointer-events:none;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;position:relative;z-index:1}
+.contact-info h3{font-family:var(--serif);font-size:28px;margin-bottom:16px}
+.contact-info p{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:28px;font-weight:300}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{
+  display:flex;align-items:center;gap:12px;padding:16px 20px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  text-decoration:none;color:var(--text);transition:all .25s;font-size:14px;
+}
+.contact-link:hover{border-color:var(--accent);background:var(--glow2);transform:translateX(4px)}
+.contact-link-icon{font-size:18px;flex-shrink:0}
+.contact-link span{font-weight:500}
+.contact-link small{display:block;font-size:11px;color:var(--dim);font-weight:400;margin-top:2px}
+
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--dim);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.form-input,.form-textarea,.form-select{
+  width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;color:var(--text);font-family:var(--sans);font-size:14px;
+  transition:border-color .2s;outline:none;appearance:none;
+}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,.08)}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(138,145,137,.5)}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.6}
+.form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a9189' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-form{
+  width:100%;padding:16px;background:var(--accent);color:var(--bg);
+  border:none;border-radius:10px;font-family:var(--sans);font-size:15px;font-weight:600;
+  cursor:pointer;transition:all .25s;margin-top:4px;
+}
+.btn-form:hover:not(:disabled){box-shadow:0 0 30px var(--glow);transform:translateY(-2px)}
+.btn-form:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-note{font-size:11px;color:var(--dim);text-align:center;margin-top:12px}
+
+/* ── FOOTER ── */
+footer{
+  padding:28px 48px;display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);font-size:11px;color:rgba(255,255,255,.2);
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+@keyframes heroIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{animation:heroIn .6s .1s both}
+.hero h1{animation:heroIn .7s .2s both}
+.hero-desc{animation:heroIn .6s .35s both}
+.hero-actions{animation:heroIn .6s .45s both}
+.stats{animation:heroIn .6s .55s both}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .services{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .about-visual{border-right:none;border-bottom:1px solid var(--border);padding:40px 24px}
+  .about-content{padding:40px 24px}
+  .contact-grid{grid-template-columns:1fr}
+  .case-card{padding:32px 24px}
+}
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .nav-links a:not(.nav-cta){display:none}
+  .nav-burger{display:flex}
+  .hero{padding:120px 24px 60px}
+  section{padding:80px 24px}
+  .contact-section{padding:80px 24px}
+  .stats{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:20px 24px}
+}
+@media print{
+  body{background:white;color:#111}
+  body::after,.cursor-glow,.hero-grid{display:none}
+  nav{position:static;background:white;border-bottom:1px solid #ddd}
+  .hero{min-height:auto;padding:40px}
+  section,.contact-section{padding:40px;page-break-inside:avoid}
+  .services{gap:12px}
+  .service{border:1px solid #ddd}
+  .contact-section::before{display:none}
+}
+</style>
+</head>
+<body>
+<div class="cursor-glow" id="glow"></div>
+
+<nav>
+  <a href="#" class="nav-logo">ayoub<span>.</span>aitnacer</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="#about">A propos</a>
+    <a href="#contact" class="nav-cta">Audit gratuit</a>
+  </div>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menu mobile">
+  <a href="#services">Services</a>
+  <a href="#pricing">Tarifs</a>
+  <a href="#about">A propos</a>
+  <a href="#case">Cas client</a>
+  <a href="#contact" class="mob-cta">Audit gratuit</a>
+</div>
+
+<section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-badge">
+    <span class="hero-badge-dot" aria-hidden="true"></span>
+    <span>Disponible pour de nouvelles missions</span>
+  </div>
+  <h1>J'automatise les <span class="accent">tâches répétitives</span> des dirigeants et entrepreneurs.</h1>
+  <p class="hero-desc">Outils sur-mesure pour récupérer le temps perdu sur les processus manuels.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Réserver l'audit gratuit</a>
+    <a href="#case" class="btn-secondary">Voir un cas client ↓</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">outils livrés à ce jour</div></div>
+    <div class="stat"><div class="stat-num">48h</div><div class="stat-label">pour recevoir une proposition</div></div>
+    <div class="stat"><div class="stat-num">30s</div><div class="stat-label">pour générer un devis PDF</div></div>
+    <div class="stat"><div class="stat-num">0€</div><div class="stat-label">pour l'audit express</div></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-tag">Services</div>
+  <h2 class="section-heading">Trois étapes,<br>un parcours simple</h2>
+  <p class="section-sub">Du diagnostic à la maintenance. Vous vous concentrez sur votre métier.</p>
+  <div class="services">
+    <div class="service reveal">
+      <span class="service-arrow" aria-hidden="true">→</span>
+      <div class="service-num" aria-hidden="true">01</div>
+      <div class="service-icon" aria-hidden="true">🔍</div>
+      <h3>Audit Express</h3>
+      <div class="service-price">Gratuit — 30 min</div>
+      <p>Un appel de 30 minutes pour identifier 1 ou 2 tâches qui vous prennent trop de temps. Vous repartez avec un diagnostic clair et un devis si vous voulez aller plus loin.</p>
+      <div class="service-tags">
+        <span class="service-tag">30 min</span><span class="service-tag">Gratuit</span><span class="service-tag">Sans engagement</span>
+      </div>
+    </div>
+    <div class="service reveal reveal-delay-1">
+      <span class="service-arrow" aria-hidden="true">→</span>
+      <div class="service-num" aria-hidden="true">02</div>
+      <div class="service-icon" aria-hidden="true">⚡</div>
+      <h3>Build</h3>
+      <div class="service-price">A partir de 300 €</div>
+      <p>Conception et déploiement d'un outil sur-mesure adapté à votre process. Deux familles d'intervention :</p>
+      <ul class="service-list">
+        <li>Automatisation de processus (facturation, reporting, suivi clients, traitement de documents)</li>
+        <li>Outils web & dashboards (interfaces internes, formulaires intelligents, tableaux de bord)</li>
+      </ul>
+      <div class="service-tags">
+        <span class="service-tag">Sur mesure</span><span class="service-tag">Forfait fixe</span><span class="service-tag">Clé en main</span>
+      </div>
+    </div>
+    <div class="service reveal reveal-delay-2">
+      <span class="service-arrow" aria-hidden="true">→</span>
+      <div class="service-num" aria-hidden="true">03</div>
+      <div class="service-icon" aria-hidden="true">🔄</div>
+      <h3>Run</h3>
+      <div class="service-price">A partir de 30 €/mois</div>
+      <p>Maintenance, corrections et ajustements quand votre process évolue. Sans engagement.</p>
+      <div class="service-tags">
+        <span class="service-tag">Maintenance</span><span class="service-tag">Corrections</span><span class="service-tag">Sans engagement</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="case">
+  <div class="section-tag">Cas client</div>
+  <h2 class="section-heading reveal">Les Salons de la Lys</h2>
+  <p class="section-sub reveal reveal-delay-1">Location de décoration pour mariages et événements.</p>
+  <div class="case-card reveal reveal-delay-2">
+    <h3>Application web complète avec espace admin</h3>
+    <a href="https://lessalonsdelalys.com" target="_blank" rel="noopener noreferrer" class="case-card-link">lessalonsdelalys.com →</a>
+    <p class="case-card-intro">Les Salons de la Lys gérait toute son activité à la main : demandes par téléphone et messages éparpillés, suivi des disponibilités sur papier, devis rédigés un par un sous Word.</p>
+    <p class="case-card-intro">J'ai conçu une application web complète avec espace admin sécurisé :</p>
+    <ul class="case-card-list">
+      <li>Formulaire public de demande de devis intégré au site, avec deux parcours (décoration sur-mesure et location click & collect)</li>
+      <li>Dashboard admin avec suivi des demandes par statut (en attente, devis envoyé, validé) et recherche client</li>
+      <li>Gestion d'inventaire complète : ajout, modification et suivi en temps réel du matériel disponible</li>
+      <li>Calendrier des événements pour visualiser les réservations et éviter les double-bookings</li>
+      <li>Générateur de devis PDF automatique à partir des informations saisies</li>
+    </ul>
+    <div class="case-card-result">
+      <div class="case-card-result-label">Résultat</div>
+      <p>Toute l'activité centralisée dans un seul outil, plus de saisie en double, devis générés en quelques clics au lieu de plusieurs minutes par dossier.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" id="pricing">
+  <div class="section-tag">Investissement</div>
+  <h2 class="section-heading reveal">Tarifs clairs,<br>sans surprise</h2>
+  <p class="section-sub reveal reveal-delay-1">Trois niveaux. Pas de devis à l'aveugle.</p>
+  <div class="pricing-rows reveal reveal-delay-1">
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-row-title">Audit Express</div>
+        <div class="pricing-row-desc">Appel de 30 min pour identifier vos tâches chronophages et poser un diagnostic.</div>
+      </div>
+      <div class="pricing-row-price">Gratuit</div>
+    </div>
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-row-title">Build</div>
+        <div class="pricing-row-desc">Conception et déploiement d'un outil sur-mesure. Forfait fixé avant de commencer.</div>
+      </div>
+      <div class="pricing-row-price">A partir de 300 €</div>
+    </div>
+    <div class="pricing-row">
+      <div>
+        <div class="pricing-row-title">Run</div>
+        <div class="pricing-row-desc">Maintenance, corrections et ajustements. Sans engagement.</div>
+      </div>
+      <div class="pricing-row-price">A partir de 30 €/mois</div>
+    </div>
+  </div>
+  <p class="pricing-note reveal reveal-delay-2">Chaque projet commence par un audit gratuit de 30 min. Pas de devis surprise, pas d'engagement avant d'avoir vu la proposition.</p>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-visual-grid" aria-hidden="true"></div>
+      <div class="about-quote">J'ai vu des dirigeants perdre des heures sur des tâches qu'un outil simple pourrait faire en secondes.</div>
+      <div class="about-quote-author">— C'est pour ça que j'automatise.</div>
+    </div>
+    <div class="about-content reveal reveal-delay-1">
+      <div class="section-tag">A propos</div>
+      <h3>Ayoub Ait Nacer</h3>
+      <p>Étudiant en dernière année à l'EDHEC Business School (Corporate Finance), je conçois en parallèle des outils sur-mesure pour automatiser les tâches répétitives des dirigeants et entrepreneurs.</p>
+      <p>Mon parcours : contrôle financier chez EY Luxembourg, accompagnement de clients en cabinet d'expertise comptable, et aujourd'hui des projets d'automatisation pour des entrepreneurs sur des problématiques concrètes.</p>
+      <div class="about-timeline">
+        <div class="about-step">
+          <div class="about-step-label">Formation</div>
+          <div class="about-step-text">EDHEC Business School — Corporate Finance</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-label">Contrôle financier</div>
+          <div class="about-step-text">EY Luxembourg — Reporting & analyse financière</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-label">Cabinet comptable</div>
+          <div class="about-step-text">Accompagnement de clients en expertise comptable</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-label">Aujourd'hui</div>
+          <div class="about-step-text">Automatisation sur mesure pour dirigeants et entrepreneurs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-tag reveal">Contact</div>
+  <h2 class="section-heading reveal">Réservez votre audit gratuit</h2>
+  <p class="section-sub reveal reveal-delay-1">Réponse sous 24h.</p>
+  <div class="contact-grid">
+    <div class="reveal reveal-delay-1">
+      <div class="contact-info">
+        <h3>Prenons contact</h3>
+        <p>Remplissez le formulaire ou choisissez le canal qui vous convient. Je réponds sous 24h en semaine.</p>
+        <div class="contact-links">
+          <a href="mailto:ayoub.aitnacer@edu.edhec.com" class="contact-link" aria-label="Envoyer un email">
+            <span class="contact-link-icon" aria-hidden="true">✉️</span>
+            <div>
+              <span>Email</span>
+              <small>ayoub.aitnacer@edu.edhec.com</small>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/ayoubaitnacer/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Profil LinkedIn (ouvre dans un nouvel onglet)">
+            <span class="contact-link-icon" aria-hidden="true">💼</span>
+            <div>
+              <span>LinkedIn</span>
+              <small>Réponse rapide</small>
+            </div>
+          </a>
+          <a href="https://www.malt.fr/profile/ayoubaitnacer" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Profil Malt (ouvre dans un nouvel onglet)">
+            <span class="contact-link-icon" aria-hidden="true">🔗</span>
+            <div>
+              <span>Malt</span>
+              <small>Profil & avis clients</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-delay-2">
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="firstName">Prénom</label>
+            <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Jean" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="company">Entreprise</label>
+            <input class="form-input" type="text" id="company" name="company" placeholder="Mon entreprise" autocomplete="organization">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="jean@monentreprise.fr" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="service">Ce qui vous intéresse</label>
+          <select class="form-select form-input" id="service" name="service">
+            <option value="">Choisir…</option>
+            <option value="Audit Express (gratuit, 30 min)">Audit Express (gratuit, 30 min)</option>
+            <option value="Build — automatisation de processus">Build — automatisation de processus</option>
+            <option value="Build — outil web / dashboard">Build — outil web / dashboard</option>
+            <option value="Run — maintenance">Run — maintenance</option>
+            <option value="Autre / je ne sais pas encore">Autre / je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Votre situation en quelques mots</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Ex : je perds 2h par semaine à saisir des factures manuellement…"></textarea>
+        </div>
+        <button type="submit" class="btn-form" id="submitBtn">Envoyer le message</button>
+        <p class="form-note">Réponse sous 24h · Sans engagement · Données confidentielles</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Ayoub Ait Nacer</span>
+  <span>Automatisation sur mesure — Lille, France</span>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('glow');
+let glowActive = false;
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+  if (!glowActive) { glow.style.opacity = '1'; glowActive = true; }
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Mobile menu
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Contact form — Formspree
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const form = this;
+  const data = new FormData(form);
+
+  const email = data.get('email') || '';
+  const firstName = data.get('firstName') || '';
+  if (!firstName.trim() || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours…';
+
+  fetch('https://formspree.io/f/maqllvqa', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: data
+  })
+  .then(() => {
+    btn.textContent = 'Message envoyé ✓';
+    btn.style.background = 'var(--accent2)';
+    form.reset();
+    setTimeout(() => {
+      btn.textContent = 'Envoyer le message';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  })
+  .catch(() => {
+    btn.textContent = 'Erreur — réessayez';
+    btn.style.background = '#ef4444';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = 'Envoyer le message';
+      btn.style.background = '';
+    }, 3000);
+  });
+});
+</script>
+</body>
+</html>
