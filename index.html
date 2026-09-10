@@ -3,780 +3,946 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayoub Ait Nacer — Automatisation sur mesure</title>
-<meta name="description" content="J'automatise les tâches répétitives des dirigeants et entrepreneurs. Outils web sur mesure. Basé à Lille, missions en France.">
+<title>AANOPS — Business Systems &amp; Performance</title>
+<meta name="description" content="Finance, systèmes métier, digital et opérations : AANOPS aide les entreprises à structurer leur activité, comprendre leurs chiffres et construire leurs outils.">
+<link rel="canonical" href="https://aanops.com/">
+<link rel="alternate" hreflang="fr" href="https://aanops.com/">
+<link rel="alternate" hreflang="en" href="https://aanops.com/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://aanops.com/">
+<meta name="theme-color" content="#080809">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AANOPS">
+<meta property="og:url" content="https://aanops.com/">
+<meta property="og:title" content="AANOPS — Business Systems &amp; Performance">
+<meta property="og:description" content="Nous construisons les systèmes qui font mieux tourner les entreprises : finance, systèmes métier, digital et opérations.">
+<meta property="og:image" content="https://aanops.com/assets/og-aanops.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AANOPS — Business Systems &amp; Performance">
+<meta name="twitter:description" content="Nous construisons les systèmes qui font mieux tourner les entreprises : finance, systèmes métier, digital et opérations.">
+<meta name="twitter:image" content="https://aanops.com/assets/og-aanops.png">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="/assets/work/ambia/pos-till.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script>
+// Hide the page until the non-default language is applied (avoids a flash of French). Keep SUPPORTED in sync with assets/i18n.js.
+(function () {
+  var SUPPORTED = ['fr', 'en'];
+  var d = document.documentElement;
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var s = null; try { s = localStorage.getItem('aanops-lang'); } catch (e) {}
+    var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || 'fr').slice(0, 2).toLowerCase();
+    var l = [q, s, SUPPORTED.indexOf(nav) > -1 ? nav : 'en'].filter(function (x) { return x && SUPPORTED.indexOf(x) > -1; })[0] || 'fr';
+    if (l !== 'fr') { d.className += ' i18n-pending'; setTimeout(function () { d.classList.remove('i18n-pending'); }, 1500); }
+  } catch (e) {}
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AANOPS",
+  "slogan": "Business Systems & Performance",
+  "url": "https://aanops.com/",
+  "logo": "https://aanops.com/assets/logo-aanops.png",
+  "image": "https://aanops.com/assets/og-aanops.png",
+  "email": "ay.aitnacer@gmail.com",
+  "telephone": "+33617933974",
+  "address": { "@type": "PostalAddress", "addressLocality": "Lille", "addressCountry": "FR" },
+  "areaServed": ["FR", "Worldwide"],
+  "founder": { "@type": "Person", "name": "Ayoub Ait Nacer", "sameAs": "https://www.linkedin.com/in/ayoubaitnacer/" },
+  "knowsAbout": ["Financial modelling", "Cash-flow management", "Point of sale systems", "Business software", "Web applications", "Process automation", "Operations"]
+}
+</script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+.i18n-pending body { visibility: hidden; }
 
 :root {
   --bg: #080809;
   --surface: #0e0e11;
   --lift: #14141a;
-  --border: rgba(255,255,255,0.05);
-  --border-hi: rgba(255,255,255,0.09);
   --text: #edeae2;
-  --dim: #5c5c6e;
-  --dim2: #38384a;
+  --dim: #8f8f9d;
+  --dim2: #5d5d70;
   --accent: #10b981;
   --ag: rgba(16,185,129,0.12);
-  --af: rgba(16,185,129,0.05);
+  --bd: 2px solid rgba(237,234,226,0.12);
+  --bd-hi: 2px solid rgba(237,234,226,0.22);
+  --bd-acc: 2px solid #10b981;
+  --sh: 4px 4px 0 rgba(16,185,129,0.45);
+  --sh-lg: 6px 6px 0 rgba(16,185,129,0.45);
   --syne: 'Syne', system-ui, sans-serif;
   --sans: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', monospace;
-  --nav-h: 58px;
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mono: 'DM Mono', ui-monospace, monospace;
+  --nav-h: 60px;
+  --max: 1240px;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); overflow-x: hidden; }
+html { scroll-padding-top: calc(var(--nav-h) + 8px); overflow-x: hidden; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  max-width: 100vw;
-  cursor: none;
+  line-height: 1.5;
 }
-@media (pointer: coarse) {
-  body { cursor: auto; }
-  .cursor-dot, .cursor-ring { display: none; }
-  a, button { cursor: pointer; }
-}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* Grain */
-body::after {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.022; mix-blend-mode: overlay;
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 300;
+  background: var(--accent); color: var(--bg); padding: 10px 16px;
+  font-family: var(--mono); font-size: 12px; text-decoration: none;
 }
+.skip:focus { top: 12px; }
 
-/* ── CURSOR ── */
-.cursor-dot {
-  position: fixed; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent); pointer-events: none; z-index: 10000;
-  transform: translate(-50%,-50%); transition: opacity 0.3s;
-  will-change: transform;
-}
-.cursor-ring {
-  position: fixed; width: 32px; height: 32px; border-radius: 50%;
-  border: 1px solid rgba(16,185,129,0.4); pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%); transition: width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.3s, border-color 0.3s;
-  will-change: transform;
-}
-.cursor-ring.hov { width: 48px; height: 48px; border-color: var(--accent); }
+.wrap { max-width: var(--max); margin: 0 auto; }
 
 /* ── NAV ── */
-nav {
+.nav {
   position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
-  padding: 0 48px;
+  padding: 0 0 0 32px;
   display: flex; align-items: center; justify-content: space-between;
-  transition: background 0.5s, border-color 0.5s;
+  background: rgba(8,8,9,0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--bd);
 }
-nav.scrolled {
-  background: rgba(8,8,9,0.88);
-  backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid var(--border);
+.nav-logo { display: flex; align-items: center; height: var(--nav-h); text-decoration: none; }
+.nav-logo img { height: 30px; width: auto; }
+.nav-right { display: flex; align-items: center; height: 100%; }
+.nav-links { display: flex; align-items: center; height: 100%; }
+.nav-links a {
+  font-size: 11px; color: var(--dim); text-decoration: none;
+  letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--mono);
+  padding: 0 18px; height: 100%; display: flex; align-items: center;
+  border-left: var(--bd); transition: color 0.12s, background 0.12s;
 }
-.nav-logo { font-family: var(--syne); font-size: 15px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
-.nav-logo em { color: var(--accent); font-style: normal; }
-.nav-links { display: flex; gap: 36px; align-items: center; flex-shrink: 0; }
-.nav-links a { font-size: 12px; font-weight: 400; color: var(--dim); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; font-family: var(--mono); }
-.nav-links a:hover { color: var(--text); }
-.nav-cta { color: var(--accent) !important; border: 1px solid rgba(16,185,129,0.25) !important; padding: 7px 18px !important; border-radius: 4px !important; transition: all 0.25s !important; }
-.nav-cta:hover { background: var(--af) !important; border-color: var(--accent) !important; }
-nav.scrolled .nav-cta { background: var(--accent) !important; color: var(--bg) !important; border-color: var(--accent) !important; }
+.nav-links a:hover { color: var(--text); background: var(--lift); }
+.nav-cta {
+  font-size: 11px; color: var(--accent); text-decoration: none; font-family: var(--mono);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0 22px; height: 100%; display: flex; align-items: center; gap: 8px;
+  border-left: var(--bd); transition: background 0.12s;
+}
+.nav-cta:hover { background: var(--ag); }
 
-/* Mobile */
-.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; flex-shrink: 0; }
-.burger span { display: block; width: 20px; height: 1.5px; background: var(--dim); border-radius: 1px; transition: all 0.3s; }
-.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.burger.open span:nth-child(2) { opacity: 0; }
-.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.lang-switch { display: flex; height: 100%; border-left: var(--bd); }
+.lang-switch button {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--dim2);
+  padding: 0 12px; height: 100%; transition: color 0.12s, background 0.12s;
+}
+.lang-switch button:hover { color: var(--text); background: var(--lift); }
+.lang-switch button[aria-pressed="true"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+
+.burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  cursor: pointer; background: none; border: none; border-left: var(--bd);
+  width: 56px; height: 100%; align-items: center;
+}
+.burger span { display: block; width: 20px; height: 2px; background: var(--text); transition: transform 0.2s, opacity 0.2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .mob-menu {
-  display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
-  background: rgba(8,8,9,0.97); backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border); padding: 20px 24px 28px;
-  flex-direction: column; gap: 2px; z-index: 99;
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
+  background: var(--bg); border-bottom: var(--bd);
+  display: flex; flex-direction: column;
+  transform: translateZ(0); box-shadow: 0 24px 48px rgba(0,0,0,0.6);
 }
-.mob-menu.open { display: flex; }
-.mob-menu a { font-size: 14px; color: var(--dim); text-decoration: none; padding: 12px 16px; border-radius: 4px; transition: all 0.2s; font-family: var(--mono); cursor: pointer; }
+.mob-menu a {
+  font-size: 13px; color: var(--dim); text-decoration: none;
+  padding: 16px 20px; border-bottom: var(--bd);
+  font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.mob-menu a:last-child { border-bottom: none; color: var(--accent); }
 .mob-menu a:hover { color: var(--text); background: var(--lift); }
-.mob-menu .mob-cta { color: var(--accent); margin-top: 8px; border: 1px solid rgba(16,185,129,0.25); text-align: center; border-radius: 4px; }
 
-/* ── HERO ── */
-.hero {
-  position: relative; min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 0 48px;
-  overflow: hidden;
-}
-
-.hero-inner { position: relative; z-index: 2; max-width: 1100px; }
-
-.hero-sys {
-  font-family: var(--mono); font-size: 10px; color: var(--dim);
-  letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 32px; display: flex; align-items: center; gap: 12px;
-  opacity: 0; animation: fadeUp 0.7s 0.15s var(--ease) forwards;
-}
-.sys-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.5s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
-
-.hero h1 {
-  font-family: var(--syne);
-  font-size: clamp(40px, 9vw, 130px);
-  font-weight: 800; line-height: 0.93;
-  letter-spacing: -0.035em;
-  margin-bottom: 48px;
-  opacity: 0; animation: fadeUp 0.9s 0.28s var(--ease) forwards;
-}
-.hero h1 .line2 { display: block; color: var(--accent); }
-.hero h1 .line3 { display: block; }
-
-.hero-ctas {
-  display: flex; gap: 20px; align-items: center;
-  opacity: 0; animation: fadeUp 0.8s 0.45s var(--ease) forwards;
-}
-.btn-p {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--accent); color: var(--bg);
-  padding: 13px 28px; border-radius: 3px;
-  font-size: 13px; font-weight: 500; font-family: var(--syne);
-  text-decoration: none; letter-spacing: 0.02em;
-  transition: all 0.3s var(--ease);
-}
-.btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(16,185,129,0.28); }
-.btn-g {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: var(--dim); font-size: 12px; font-family: var(--mono);
-  text-decoration: none; letter-spacing: 0.06em;
-  transition: color 0.2s;
-}
-.btn-g:hover { color: var(--accent); }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Scroll cue */
-.scroll-cue {
-  position: absolute; right: 48px; bottom: 48px; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  opacity: 0; animation: fadeUp 0.7s 0.9s var(--ease) forwards;
-}
-.scroll-cue span { font-family: var(--mono); font-size: 9px; color: var(--dim2); letter-spacing: 0.15em; text-transform: uppercase; writing-mode: vertical-lr; }
-.scroll-cue-line { width: 1px; height: 40px; background: linear-gradient(var(--accent), transparent); }
-
-/* ── MARQUEE ── */
-.marquee-wrap {
-  overflow: hidden; background: var(--surface);
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  padding: 14px 0; max-width: 100vw; contain: content;
-}
-.marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
-.marquee-track:hover { animation-play-state: paused; }
-.marquee-item {
-  display: flex; align-items: center; gap: 24px;
-  padding: 0 24px; white-space: nowrap;
-  font-family: var(--mono); font-size: 11px; color: var(--dim);
-  letter-spacing: 0.12em; text-transform: uppercase;
-}
-.marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* ── SHARED SECTION ── */
-section { padding: 112px 48px; overflow-x: hidden; }
-.s-inner { position: relative; }
-.s-num {
-  position: absolute; right: -20px; top: -60px;
-  font-family: var(--syne); font-size: 180px; font-weight: 800;
-  color: rgba(255,255,255,0.018); line-height: 1; pointer-events: none;
-  letter-spacing: -0.04em; user-select: none;
-}
+/* ── SHARED ── */
+section { padding: 104px 32px; border-bottom: var(--bd); }
 .s-tag {
   font-family: var(--mono); font-size: 10px; color: var(--accent);
   letter-spacing: 0.18em; text-transform: uppercase;
-  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  margin-bottom: 18px; display: inline-flex; align-items: center; gap: 8px;
+  border: var(--bd-acc); padding: 4px 10px;
 }
 .s-tag::before { content: '//'; color: var(--dim2); }
 .s-head {
-  font-family: var(--syne); font-size: clamp(36px, 4.5vw, 62px);
-  font-weight: 800; line-height: 1.0; letter-spacing: -0.025em;
-  margin-bottom: 16px;
+  font-family: var(--syne); font-size: clamp(32px, 3.8vw, 54px);
+  font-weight: 700; line-height: 1; letter-spacing: -0.03em; margin-bottom: 20px;
 }
 .s-head em { font-style: normal; color: var(--accent); }
-.s-sub { font-size: 14px; color: var(--dim); line-height: 1.75; max-width: 460px; font-weight: 300; }
+.s-sub { font-size: 16px; color: var(--dim); line-height: 1.7; max-width: 540px; font-weight: 300; }
+.mono-k { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.btn-p {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--accent); color: var(--bg);
+  padding: 15px 28px; border: var(--bd-acc);
+  font-size: 14px; font-weight: 700; font-family: var(--syne);
+  text-decoration: none; letter-spacing: 0.02em; cursor: pointer;
+  box-shadow: var(--sh); transition: transform 0.08s, box-shadow 0.08s;
+}
+.btn-p:hover { transform: translate(-2px,-2px); box-shadow: var(--sh-lg); }
+.btn-p:active { transform: translate(2px,2px); box-shadow: none; }
+.btn-g {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text); font-size: 12px; font-family: var(--mono);
+  text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 15px 20px; border: var(--bd); transition: background 0.1s, border-color 0.1s;
+}
+.btn-g:hover { border-color: rgba(237,234,226,0.3); background: var(--lift); }
+.chip { font-family: var(--mono); font-size: 10px; color: var(--dim); border: var(--bd); padding: 4px 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.dot-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.dot-list li { display: flex; gap: 10px; font-size: 14px; color: var(--dim); line-height: 1.5; font-weight: 300; }
+.dot-list li::before { content: ''; width: 5px; height: 5px; background: var(--accent); flex-shrink: 0; margin-top: 8px; }
 
 /* Reveal */
-.r { opacity: 0; transform: translateY(24px); transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
-.r.in { opacity: 1; transform: none; }
-.r-d1 { transition-delay: 0.08s; }
-.r-d2 { transition-delay: 0.16s; }
-.r-d3 { transition-delay: 0.24s; }
-.r-d4 { transition-delay: 0.32s; }
+.js .r { opacity: 0; transform: translateY(16px); transition: opacity 0.45s, transform 0.45s; }
+.js .r.in { opacity: 1; transform: none; }
+.r-d1 { transition-delay: 0.07s; }
+.r-d2 { transition-delay: 0.14s; }
+.r-d3 { transition-delay: 0.21s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ── PAIN POINTS ── */
-#painpoints { background: var(--surface); border-bottom: 1px solid var(--border); }
-.pp-header { margin-bottom: 56px; }
-.pp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.pp-card {
-  background: var(--surface); padding: 36px 28px; position: relative;
-  transition: background 0.25s;
+/* Screenshot frame */
+.shot { background: var(--surface); border: var(--bd-hi); box-shadow: var(--sh-lg); overflow: hidden; }
+.shot-bar {
+  display: flex; align-items: center; gap: 5px; padding: 8px 10px;
+  border-bottom: var(--bd); font-family: var(--mono); font-size: 10px; color: var(--dim);
+  letter-spacing: 0.04em; white-space: nowrap; overflow: hidden;
 }
-.pp-card:hover { background: var(--lift); }
-.pp-card-num { font-family: var(--mono); font-size: 10px; color: var(--dim2); letter-spacing: 0.1em; margin-bottom: 24px; }
-.pp-card-title { font-family: var(--syne); font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 10px; }
-.pp-card-desc { font-size: 13px; color: var(--dim); line-height: 1.7; font-weight: 300; }
-.pp-cta-row { margin-top: 48px; display: flex; align-items: center; gap: 20px; }
-.pp-note { font-family: var(--mono); font-size: 11px; color: var(--dim2); }
+.shot-bar i { width: 6px; height: 6px; background: var(--dim2); flex-shrink: 0; }
+.shot-bar i:nth-of-type(3) { background: var(--accent); margin-right: 6px; }
+.shot img { width: 100%; }
 
-/* ── SERVICES ── */
-#services { border-bottom: 1px solid var(--border); }
-.svc-header { margin-bottom: 64px; }
-.svc-list {}
+/* ── HERO ── */
+.hero { padding: calc(var(--nav-h) + 72px) 32px 72px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.hero-sys {
+  font-family: var(--mono); font-size: 11px; color: var(--dim);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 26px; display: flex; align-items: center; gap: 10px;
+  animation: fadeUp 0.45s 0.05s both;
+}
+.sys-dot { width: 8px; height: 8px; background: var(--accent); border: 2px solid rgba(16,185,129,0.3); flex-shrink: 0; }
+.hero h1 {
+  font-family: var(--syne); font-size: clamp(34px, 3.9vw, 58px);
+  font-weight: 700; line-height: 1.04; letter-spacing: -0.035em;
+  margin-bottom: 24px; animation: fadeUp 0.5s 0.12s both;
+}
+.hero h1 .hl { color: var(--accent); border-bottom: 3px solid var(--accent); }
+.hero-lead {
+  font-size: clamp(16px, 1.45vw, 19px); color: var(--dim); line-height: 1.65;
+  max-width: 580px; font-weight: 300; margin-bottom: 32px;
+  animation: fadeUp 0.45s 0.2s both;
+}
+.hero-lead strong { color: var(--text); font-weight: 500; }
+.hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; animation: fadeUp 0.45s 0.28s both; }
+.hero-note { margin-top: 18px; font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase; animation: fadeUp 0.45s 0.34s both; }
+
+.hero-visual { position: relative; display: block; text-decoration: none; padding: 0 0 56px 44px; animation: fadeUp 0.6s 0.3s both; }
+.hero-visual .hv-phone { position: absolute; left: 0; bottom: 0; width: 31%; }
+.hero-visual .hv-phone .shot-bar { padding: 6px 8px; font-size: 9px; }
+.hv-caption {
+  position: absolute; right: 0; bottom: 12px; display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;
+  transition: color 0.12s;
+}
+.hero-visual:hover .hv-caption { color: var(--accent); }
+
+.hero-proof {
+  list-style: none;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px;
+  margin-top: 64px; background: rgba(237,234,226,0.06); border: var(--bd);
+  animation: fadeUp 0.45s 0.45s both;
+}
+.hp-item { background: var(--surface); padding: 20px 22px; }
+.hp-k { font-family: var(--syne); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.hp-item:not(:last-child) .hp-k::after { content: ' ×'; color: var(--accent); }
+.hp-v { font-size: 13px; color: var(--dim); line-height: 1.55; font-weight: 300; }
+
+/* ── EXPERTISE ── */
+#expertise { background: var(--surface); }
+.split-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-bottom: 64px; }
+.approach { display: grid; gap: 2px; background: rgba(237,234,226,0.06); border: var(--bd); }
+.ap-cell { background: var(--bg); padding: 22px 24px; }
+.ap-cell.acc { background: var(--ag); box-shadow: inset 3px 0 0 var(--accent); }
+.ap-k { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.ap-cell.acc .ap-k { color: var(--accent); }
+.ap-q { font-family: var(--syne); font-size: clamp(16px, 1.6vw, 20px); font-weight: 700; line-height: 1.35; }
+.ap-q.muted { color: var(--dim); }
+
 .svc-item {
-  display: grid; grid-template-columns: 56px 1fr 1fr;
-  gap: 48px; align-items: start; padding: 44px 0;
-  border-top: 1px solid var(--border); position: relative; cursor: default;
+  display: grid; grid-template-columns: 56px minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 40px; align-items: start; padding: 36px 0;
+  border-top: var(--bd); position: relative;
 }
-.svc-item:last-child { border-bottom: 1px solid var(--border); }
-.svc-item::after {
-  content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
-  background: var(--accent); transition: width 0.6s var(--ease);
-}
+.svc-item::after { content: ''; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0; background: var(--accent); transition: width 0.5s; }
 .svc-item:hover::after { width: 100%; }
-.svc-num { font-family: var(--mono); font-size: 12px; color: var(--dim2); padding-top: 6px; transition: color 0.3s; }
+.svc-item:last-child { border-bottom: var(--bd); }
+.svc-num { font-family: var(--mono); font-size: 12px; color: var(--dim2); padding-top: 6px; transition: color 0.2s; }
 .svc-item:hover .svc-num { color: var(--accent); }
-.svc-title { font-family: var(--syne); font-size: 28px; font-weight: 700; line-height: 1.05; margin-bottom: 6px; letter-spacing: -0.02em; }
-.svc-price { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; }
-.svc-desc { font-size: 13px; color: var(--dim); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
-.svc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-family: var(--mono); font-size: 10px; color: var(--dim); border: 1px solid var(--border-hi); padding: 4px 10px; letter-spacing: 0.06em; }
+.svc-title { font-family: var(--syne); font-size: clamp(22px, 2.3vw, 30px); font-weight: 700; line-height: 1.05; margin-bottom: 8px; letter-spacing: -0.025em; }
+.svc-kicker { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
+.svc-desc { font-size: 15px; color: var(--dim); line-height: 1.7; font-weight: 300; margin-bottom: 16px; }
+.exp-outcome { margin-top: 40px; max-width: 820px; font-size: 16px; color: var(--dim); line-height: 1.7; font-weight: 300; }
+.exp-outcome strong { color: var(--text); font-weight: 500; }
 
-/* ── CASE STUDY ── */
-#case { background: var(--surface); border-bottom: 1px solid var(--border); }
-.case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.case-tag-row { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
-.case-badge { font-family: var(--mono); font-size: 10px; color: var(--dim2); border: 1px solid var(--border-hi); padding: 5px 12px; letter-spacing: 0.1em; text-transform: uppercase; }
-.case-title { font-family: var(--syne); font-size: clamp(32px, 3.5vw, 52px); font-weight: 800; line-height: 1.0; letter-spacing: -0.025em; margin-bottom: 12px; }
-.case-sub { font-size: 13px; color: var(--dim); margin-bottom: 28px; font-weight: 300; line-height: 1.6; }
-.case-url { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; transition: opacity 0.2s; }
-.case-url:hover { opacity: 0.7; }
-.case-problem { font-size: 13px; color: var(--dim); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
-.case-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-.case-feature { display: flex; align-items: flex-start; gap: 12px; font-size: 12px; color: var(--dim); font-weight: 300; line-height: 1.5; }
-.cf-dot { width: 4px; height: 4px; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
-.case-result { padding: 24px; background: var(--af); border: 1px solid rgba(16,185,129,0.1); }
-.cr-label { font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
-.cr-text { font-size: 13px; color: var(--text); line-height: 1.7; font-weight: 300; }
+/* ── METHOD ── */
+.method-head { margin-bottom: 56px; }
+.steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; background: rgba(237,234,226,0.06); border: var(--bd); box-shadow: var(--sh-lg); }
+.step { background: var(--bg); padding: 30px 22px; position: relative; transition: background 0.12s; }
+.step:hover { background: var(--lift); }
+.step-n { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+.step:not(:last-child) .step-n::after { content: '→'; color: var(--dim2); margin-left: auto; }
+.step h3 { font-family: var(--syne); font-size: 20px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+.step p { font-size: 14px; color: var(--dim); line-height: 1.65; font-weight: 300; }
 
-/* ── PRICING ── */
-#pricing { border-bottom: 1px solid var(--border); }
-.pricing-header { margin-bottom: 56px; }
-.pricing-table { max-width: 640px; }
-.pr-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 28px 0; border-bottom: 1px solid var(--border); gap: 32px;
-  transition: padding-left 0.25s var(--ease);
-}
-.pr-row:first-child { border-top: 1px solid var(--border); }
-.pr-row:hover { padding-left: 12px; }
-.pr-title { font-family: var(--syne); font-size: 20px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
-.pr-desc { font-size: 12px; color: var(--dim); font-weight: 300; line-height: 1.6; max-width: 340px; }
-.pr-price { font-family: var(--mono); font-size: 13px; color: var(--accent); white-space: nowrap; flex-shrink: 0; letter-spacing: 0.04em; }
-.pr-note { margin-top: 24px; font-family: var(--mono); font-size: 11px; color: var(--dim2); line-height: 1.7; max-width: 480px; }
+.path { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr); gap: 48px; align-items: start; }
+.path-title { font-family: var(--syne); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+.path-list { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: var(--bd); }
+.path-list li { padding: 18px 14px 0 0; position: relative; }
+.path-list li::before { content: ''; position: absolute; top: -5px; left: 0; width: 8px; height: 8px; background: var(--bg); border: 2px solid var(--accent); }
+.path-list li:first-child::before { background: var(--accent); }
+.path-k { font-family: var(--mono); font-size: 10px; color: var(--dim2); letter-spacing: 0.1em; margin-bottom: 6px; }
+.path-t { font-family: var(--syne); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.path-d { font-size: 13px; color: var(--dim); line-height: 1.5; font-weight: 300; }
 
-/* ── PROCESS ── */
-#process { background: var(--surface); border-bottom: 1px solid var(--border); }
-.process-header { margin-bottom: 72px; }
-.process-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.ps {
-  background: var(--surface); padding: 40px 32px;
-  position: relative; transition: background 0.25s;
-}
-.ps:hover { background: var(--lift); }
-.ps-n { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 28px; display: flex; align-items: center; gap: 8px; }
-.ps-n::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.ps-title { font-family: var(--syne); font-size: 20px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em; }
-.ps-desc { font-size: 13px; color: var(--dim); line-height: 1.75; font-weight: 300; }
-.process-cta { margin-top: 48px; }
+/* ── AMBIA CASE ── */
+#ambia { background: var(--surface); }
+.case-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-bottom: 56px; }
+.case-kicker { font-family: var(--mono); font-size: 12px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+.case-intro { font-size: 17px; color: var(--dim); line-height: 1.7; font-weight: 300; margin-bottom: 24px; }
+.case-intro strong { color: var(--text); font-weight: 500; }
+.case-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: var(--bd); }
+.case-meta div { padding: 14px 16px; }
+.case-meta div + div { border-left: var(--bd); }
+.case-meta dt { font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+.case-meta dd { font-size: 13px; line-height: 1.45; }
+.case-meta a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
-/* ── ABOUT ── */
-#about { padding: 0; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; }
-.about-l {
-  padding: 96px 60px; background: var(--surface); border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
+.story { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: rgba(237,234,226,0.06); border: var(--bd); margin-bottom: 56px; }
+.story li { background: var(--bg); padding: 28px 22px; }
+.story h3 { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+.story p { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--text); }
+.story li:nth-child(4) { background: var(--ag); box-shadow: inset 0 3px 0 var(--accent); }
+
+.gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 28px; align-items: start; }
+.g { margin: 0; }
+.g-till, .g-web { grid-column: span 8; }
+.g-treasury, .g-book { grid-column: span 4; }
+.g-treasury .shot, .g-book .shot { max-width: 300px; margin: 0 auto; }
+.g figcaption { margin-top: 14px; font-size: 13px; color: var(--dim); line-height: 1.55; font-weight: 300; }
+.g figcaption b { display: block; font-family: var(--mono); font-weight: 400; font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+.g-treasury figcaption, .g-book figcaption { max-width: 300px; margin-left: auto; margin-right: auto; }
+.gallery-note { margin-top: 28px; font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.layers-title { font-family: var(--syne); font-size: clamp(24px, 2.6vw, 34px); font-weight: 700; letter-spacing: -0.02em; margin: 80px 0 24px; }
+.layers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: rgba(237,234,226,0.06); border: var(--bd); box-shadow: var(--sh-lg); }
+.layer { background: var(--bg); padding: 28px 22px; }
+.layer h4 { font-family: var(--syne); font-size: 18px; font-weight: 700; margin: 10px 0 18px; letter-spacing: -0.01em; }
+.layer .dot-list li { font-size: 13px; }
+
+/* ── WORK ── */
+.work-head { margin-bottom: 48px; }
+.work-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.work-card { background: var(--surface); border: var(--bd); display: flex; flex-direction: column; transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
+.work-card:hover { border-color: rgba(16,185,129,0.6); box-shadow: var(--sh-lg); transform: translate(-2px, -2px); }
+.work-thumb { aspect-ratio: 16 / 10; overflow: hidden; border-bottom: var(--bd); background: var(--lift); }
+.work-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.work-body { padding: 26px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+.work-ind { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+.work-card h3 { font-family: var(--syne); font-size: 24px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 18px; }
+.work-dl { display: grid; gap: 12px; margin-bottom: 20px; }
+.work-dl div { display: grid; grid-template-columns: 1fr; gap: 3px; }
+.work-dl dt { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 3px; }
+.work-dl dd { font-size: 14px; line-height: 1.55; font-weight: 300; }
+.work-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: var(--bd); }
+.work-link { font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.work-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.work-thumb.is-sheet { display: flex; flex-direction: column; background: var(--bg); }
+.sheet-bar { display: flex; align-items: center; gap: 5px; padding: 8px 10px; border-bottom: var(--bd); font-family: var(--mono); font-size: 10px; color: var(--dim); white-space: nowrap; overflow: hidden; }
+.sheet-bar i { width: 6px; height: 6px; background: var(--dim2); flex-shrink: 0; }
+.sheet-bar i:nth-of-type(3) { background: var(--accent); margin-right: 6px; }
+.sheet-tabs { list-style: none; flex: 1; display: grid; grid-template-columns: 1fr 1fr; align-content: center; gap: 6px; padding: 16px; }
+.sheet-tabs li { font-family: var(--mono); font-size: 11px; color: var(--text); background: var(--surface); border: var(--bd); padding: 8px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sheet-tabs li:first-child { border-color: rgba(16,185,129,0.6); color: var(--accent); }
+.sheet-note { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 16px 12px; }
+.work-more { margin-top: 24px; border: var(--bd); display: grid; grid-template-columns: 180px minmax(0, 1fr); }
+.work-more-k { padding: 22px 20px; font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; }
+.work-more-list { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); }
+.work-more-list li { padding: 20px 22px; border-left: var(--bd); }
+.work-more-list strong { display: block; font-family: var(--syne); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.work-more-list span { font-size: 13px; color: var(--dim); line-height: 1.6; font-weight: 300; }
+.work-more-list .work-link { display: block; width: fit-content; margin-top: 10px; }
+
+/* ── WHY ── */
+#why { background: var(--surface); }
+.why-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: rgba(237,234,226,0.06); border: var(--bd); margin-top: 56px; }
+.why-card { background: var(--bg); padding: 30px 22px; position: relative; }
+.why-card:not(:last-child)::after {
+  content: '+'; position: absolute; right: -13px; top: 26px; z-index: 2;
+  width: 24px; height: 24px; display: grid; place-items: center;
+  background: var(--accent); color: var(--bg); font-family: var(--mono); font-size: 14px;
 }
-.about-l-deco {
-  position: absolute; bottom: 0; right: 0; width: 280px; height: 280px;
-  background: radial-gradient(circle at 100% 100%, rgba(16,185,129,0.08), transparent 70%);
-  pointer-events: none;
-}
-.about-l-label { font-family: var(--mono); font-size: 10px; color: var(--dim2); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 32px; }
-.about-quote {
-  font-family: var(--syne); font-size: clamp(20px, 2.5vw, 28px); font-weight: 600;
-  line-height: 1.4; max-width: 400px; position: relative; z-index: 1;
-}
-.about-quote .aq-mark { font-size: 80px; font-weight: 800; color: var(--accent); opacity: 0.15; line-height: 1; display: block; margin-bottom: -16px; }
-.about-author { margin-top: 24px; font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; position: relative; z-index: 1; }
-.about-r { padding: 96px 60px; display: flex; flex-direction: column; justify-content: center; }
-.about-name { font-family: var(--syne); font-size: 38px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 28px; }
-.about-p { font-size: 13px; color: var(--dim); line-height: 1.8; font-weight: 300; margin-bottom: 14px; max-width: 420px; }
-.timeline { margin-top: 36px; border-left: 1px solid var(--border); padding-left: 24px; display: flex; flex-direction: column; }
-.tl-item { padding: 14px 0; position: relative; }
-.tl-item::before { content: ''; position: absolute; left: -28px; top: 20px; width: 7px; height: 7px; background: var(--bg); border: 1px solid var(--dim2); transition: all 0.3s; }
-.tl-item:hover::before { border-color: var(--accent); background: var(--accent); }
-.tl-label { font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
-.tl-text { font-size: 12px; color: var(--dim); font-weight: 300; line-height: 1.5; }
+.why-card h3 { font-family: var(--syne); font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+.why-card p { font-size: 14px; color: var(--dim); line-height: 1.65; font-weight: 300; }
+.founder { margin-top: 56px; display: grid; grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr); gap: 48px; padding-top: 40px; border-top: var(--bd); }
+.founder > div > p { font-size: 14px; color: var(--dim); line-height: 1.8; font-weight: 300; max-width: 720px; }
+.founder > div > p strong { color: var(--text); font-weight: 500; }
+.founder-links { margin-top: 18px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase; }
+.founder-links a { color: var(--accent); text-decoration: none; }
+.founder-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── FAQ ── */
-#faq { border-bottom: 1px solid var(--border); }
-.faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-.faq-l { position: sticky; top: calc(var(--nav-h) + 32px); }
-.faq-list {}
-.faq-item { border-bottom: 1px solid var(--border); }
+.faq-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 64px; align-items: start; }
+.faq-l { position: sticky; top: calc(var(--nav-h) + 24px); }
+.faq-l .s-head { font-size: clamp(28px, 3vw, 42px); }
+.faq-item { border-bottom: var(--bd); }
+.faq-item:first-child { border-top: var(--bd); }
 .faq-q {
-  width: 100%; text-align: left; padding: 20px 0; background: none; border: none;
-  color: var(--text); font-family: var(--syne); font-size: 14px; font-weight: 600;
-  cursor: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  transition: color 0.2s;
+  width: 100%; text-align: left; padding: 20px 0; background: none; border: none; cursor: pointer;
+  color: var(--text); font-family: var(--syne); font-size: 16px; font-weight: 700;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.1s;
 }
-.faq-q:hover, .faq-q.open { color: var(--accent); }
-.faq-icon { font-family: var(--mono); font-size: 16px; color: var(--dim); transition: transform 0.35s var(--ease), color 0.2s; flex-shrink: 0; }
-.faq-q.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
-.faq-a { font-size: 13px; color: var(--dim); line-height: 1.8; font-weight: 300; max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.3s; padding-bottom: 0; }
-.faq-a.open { max-height: 200px; padding-bottom: 20px; }
+.faq-q:hover, .faq-q[aria-expanded="true"] { color: var(--accent); }
+.faq-icon { font-family: var(--mono); font-size: 20px; color: var(--dim); transition: transform 0.25s; flex-shrink: 0; line-height: 1; }
+.faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-a { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+.faq-a p { font-size: 15px; color: var(--dim); line-height: 1.75; font-weight: 300; padding-bottom: 20px; max-width: 680px; }
+
+.faq-l .s-sub a { color: var(--accent); text-underline-offset: 3px; }
 
 /* ── CONTACT ── */
-#contact { position: relative; background: var(--surface); }
-#contact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.3; }
-.contact-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 500px; height: 250px; background: radial-gradient(ellipse at 50% 0%, rgba(16,185,129,0.08), transparent 70%); pointer-events: none; }
-.contact-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.ci-left h3 { font-family: var(--syne); font-size: 26px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 12px; }
-.ci-left p { font-size: 13px; color: var(--dim); line-height: 1.8; font-weight: 300; margin-bottom: 32px; max-width: 320px; }
-.promises { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
-.promise { display: flex; align-items: flex-start; gap: 12px; }
-.pm-icon { width: 18px; height: 18px; border-radius: 50%; background: var(--af); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-.pm-icon svg { width: 9px; height: 9px; stroke: var(--accent); }
-.pm-text { font-size: 13px; color: var(--text); font-weight: 300; line-height: 1.5; }
-.pm-text strong { font-weight: 500; }
-.avail-badge { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--lift); border: 1px solid var(--border-hi); font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; }
-.avail-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2.5s infinite; }
-.ci-links { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+#contact { background: var(--surface); position: relative; }
+.contact-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 64px; align-items: start; margin-top: 48px; }
+.ct-quick { display: flex; align-items: center; gap: 14px 18px; flex-wrap: wrap; margin-top: 26px; }
+.ct-quick-note { font-size: 14px; color: var(--dim); font-weight: 300; }
+.btn-wa { color: var(--accent); border-color: rgba(16,185,129,0.55); }
+.btn-wa svg { width: 16px; height: 16px; }
+.ci-left h3 { font-family: var(--syne); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 18px; }
+.ci-left .dot-list { margin-bottom: 28px; }
+.ci-promise { font-size: 14px; color: var(--text); line-height: 1.7; font-weight: 300; padding: 18px 20px; background: var(--ag); border: var(--bd-acc); margin-bottom: 28px; }
+.ci-links { display: flex; flex-direction: column; border: var(--bd); box-shadow: var(--sh); }
 .ci-link {
   display: flex; align-items: center; gap: 12px; padding: 14px 16px;
-  background: var(--bg); border: 1px solid var(--border); text-decoration: none;
-  color: var(--text); font-size: 12px; transition: all 0.25s var(--ease);
+  background: var(--bg); border-bottom: var(--bd); text-decoration: none;
+  color: var(--text); transition: background 0.1s;
 }
-.ci-link:hover { border-color: rgba(16,185,129,0.3); background: var(--lift); transform: translateX(4px); }
-.ci-link-icon { width: 30px; height: 30px; background: var(--lift); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.ci-link-icon svg { width: 13px; height: 13px; }
-.cl-name { font-weight: 500; font-family: var(--syne); font-size: 12px; }
-.cl-val { font-family: var(--mono); font-size: 10px; color: var(--dim); margin-top: 1px; }
+.ci-link:last-child { border-bottom: none; }
+.ci-link:hover { background: var(--lift); }
+.ci-link-icon { width: 30px; height: 30px; background: var(--lift); border: var(--bd); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ci-link-icon svg { width: 14px; height: 14px; }
+.cl-name { font-weight: 700; font-family: var(--syne); font-size: 13px; }
+.cl-val { font-family: var(--mono); font-size: 11px; color: var(--dim); margin-top: 1px; word-break: break-all; }
 
-/* Form */
-.cform { background: var(--bg); border: 1px solid var(--border-hi); padding: 40px; }
-.cform-title { font-family: var(--syne); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-.cform-sub { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; margin-bottom: 28px; }
-.fg { margin-bottom: 16px; }
-.fl { display: block; font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.cform { background: var(--bg); border: var(--bd-hi); padding: 36px; box-shadow: var(--sh-lg); }
+.cform-title { font-family: var(--syne); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+.cform-sub { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; margin-bottom: 26px; text-transform: uppercase; }
+.fg { margin-bottom: 16px; border: none; }
+.fl { display: block; font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+.fl .req { color: var(--accent); }
+.fl .opt { color: var(--dim2); text-transform: none; letter-spacing: 0.02em; }
 .fi, .ft {
-  width: 100%; padding: 12px 14px; background: var(--surface);
-  border: 1px solid var(--border-hi); color: var(--text);
-  font-family: var(--sans); font-size: 13px; font-weight: 300;
-  outline: none; transition: border-color 0.2s, box-shadow 0.2s; border-radius: 0;
+  width: 100%; padding: 12px 13px; background: var(--surface);
+  border: var(--bd); color: var(--text); border-radius: 0;
+  font-family: var(--sans); font-size: 16px; font-weight: 400;
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s;
 }
 .fi::placeholder, .ft::placeholder { color: var(--dim2); }
-.fi:focus, .ft:focus { border-color: rgba(16,185,129,0.5); box-shadow: 0 0 0 3px rgba(16,185,129,0.05); }
-.ft { resize: vertical; min-height: 96px; line-height: 1.6; }
+.fi:focus, .ft:focus { border-color: rgba(16,185,129,0.6); box-shadow: 4px 4px 0 rgba(16,185,129,0.2); }
+.fi[aria-invalid="true"] { border-color: #f87171; }
+.ft { resize: vertical; min-height: 110px; line-height: 1.6; }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.btn-submit {
-  width: 100%; padding: 15px; background: var(--accent); color: var(--bg);
-  border: none; font-family: var(--syne); font-size: 14px; font-weight: 700;
-  cursor: none; transition: all 0.25s var(--ease); margin-top: 8px;
-  letter-spacing: 0.02em; border-radius: 0;
+.needs { display: flex; flex-wrap: wrap; gap: 8px; }
+.need input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.need span {
+  display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+  color: var(--dim); border: var(--bd); padding: 9px 12px; cursor: pointer;
+  transition: color 0.1s, border-color 0.1s, background 0.1s;
 }
-.btn-submit:hover { box-shadow: 0 6px 32px rgba(16,185,129,0.3); transform: translateY(-1px); }
-.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-.form-reassure { display: flex; gap: 20px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
-.form-reassure span { font-family: var(--mono); font-size: 10px; color: var(--dim2); display: flex; align-items: center; gap: 5px; }
-.form-reassure span::before { content: '✓'; color: var(--accent); }
+.need span:hover { color: var(--text); border-color: rgba(237,234,226,0.3); }
+.need input:checked + span { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.need input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.need.unsure span { border-style: dashed; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.btn-submit { width: 100%; margin-top: 8px; font-size: 15px; padding: 16px; }
+.btn-submit:disabled { opacity: 0.6; cursor: wait; transform: none; box-shadow: var(--sh); }
+.form-status { margin-top: 14px; font-size: 14px; line-height: 1.55; padding: 12px 14px; border: var(--bd); }
+.form-status.ok { border: var(--bd-acc); background: var(--ag); color: var(--text); }
+.form-status.err { border-color: rgba(248,113,113,0.6); color: #fca5a5; }
+.form-reassure { margin-top: 14px; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* ── FOOTER ── */
-footer { padding: 24px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.f-logo { font-family: var(--syne); font-size: 14px; font-weight: 700; color: var(--dim); }
-.f-logo em { color: var(--accent); font-style: normal; }
-footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); letter-spacing: 0.08em; }
+footer { padding: 28px 32px; }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.foot img { height: 26px; width: auto; opacity: 0.8; }
+.foot small { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; }
+.foot nav { display: flex; gap: 18px; }
+.foot nav a { font-family: var(--mono); font-size: 10px; color: var(--dim); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
+.foot nav a:hover { color: var(--accent); }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1100px) {
-  .case-layout { grid-template-columns: 1fr; gap: 40px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-l { border-right: none; border-bottom: 1px solid var(--border); padding: 64px 40px; }
-  .about-r { padding: 64px 40px; }
-  .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+@media (max-width: 1180px) {
+  .nav-links a { padding: 0 12px; }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .path { grid-template-columns: 1fr; gap: 28px; }
+  .layers, .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why-card:nth-child(2)::after { display: none; }
+  .story { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: flex; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { max-width: 640px; }
+  .hero-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .split-head, .case-head, .founder, .contact-inner, .faq-layout { grid-template-columns: 1fr; gap: 32px; }
   .faq-l { position: static; }
-  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-  .pp-grid { grid-template-columns: repeat(2,1fr); }
-  .process-steps { grid-template-columns: 1fr; gap: 1px; }
-  .svc-item { grid-template-columns: 56px 1fr; gap: 28px; }
-  .svc-item .svc-desc, .svc-item .svc-chips { grid-column: 2; }
+  .svc-item { grid-template-columns: 48px 1fr; gap: 12px 24px; }
+  .svc-item > div:last-child { grid-column: 2; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+  .g-till, .g-web { grid-column: span 2; }
+  .g-treasury, .g-book { grid-column: span 1; }
+  .g-till { order: 1; } .g-web { order: 2; } .g-treasury { order: 3; } .g-book { order: 4; }
+  .work-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  nav { padding: 0 20px; }
-  .nav-links a:not(.nav-cta) { display: none !important; }
-  .nav-links .nav-cta { display: inline-flex; }
-  .burger { display: flex !important; }
-
-  /* Hero */
-  .hero {
-    padding: 0 20px 56px;
-    padding-top: var(--nav-h);
-    justify-content: flex-end;
-    min-height: 100svh;
-  }
-  .hero-inner { padding-top: 40px; }
-  .hero h1 { font-size: clamp(34px, 9.5vw, 56px); margin-bottom: 36px; }
-  .hero-ctas { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .btn-p { width: 100%; justify-content: center; }
-  .scroll-cue { display: none; }
-
-  /* Sections */
-  section { padding: 64px 20px; }
-  .s-head { font-size: clamp(30px, 8vw, 44px); }
-  .s-num { display: none; }
-
-  /* Pain points */
-  .pp-grid { grid-template-columns: 1fr; }
-  .pp-card { padding: 28px 20px; }
-  .pp-cta-row { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .pp-cta-row .btn-p { width: 100%; justify-content: center; }
-
-  /* Services */
-  .svc-item { grid-template-columns: 1fr; gap: 8px; padding: 32px 0; }
-  .svc-num { display: none; }
-  .svc-title { font-size: 22px; }
-
-  /* Case study */
-  .case-title { font-size: clamp(28px, 8vw, 40px); }
-
-  /* Process */
-  .process-steps { grid-template-columns: 1fr; }
-  .ps { padding: 28px 20px; }
-  .process-cta .btn-p { width: 100%; justify-content: center; }
-
-  /* About */
-  .about-l, .about-r { padding: 52px 20px; }
-  .about-name { font-size: 28px; }
-  .about-quote { font-size: 18px; }
-
-  /* FAQ */
-  .faq-q { font-size: 13px; }
-
-  /* Contact */
-  .cform { padding: 24px 16px; }
-  .frow { grid-template-columns: 1fr; }
-  .btn-submit { font-size: 13px; }
-  .form-reassure { gap: 12px; }
-
-  /* Footer */
-  footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
-
-  /* Marquee */
-  .marquee-item { font-size: 10px; }
+  .nav { padding-left: 16px; }
+  .nav-cta { padding: 0 14px; }
+  .lang-switch button { padding: 0 9px; }
+  section { padding: 64px 18px; }
+  .hero { padding: calc(var(--nav-h) + 40px) 18px 56px; }
+  .hero h1 { font-size: clamp(30px, 8.4vw, 42px); }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn-p, .hero-ctas .btn-g { justify-content: center; }
+  .hero-visual { padding: 0 0 48px 28px; }
+  .hv-caption { position: static; margin-top: 16px; justify-content: flex-end; }
+  .hero-visual .hv-phone { bottom: 30px; }
+  .hero-proof { margin-top: 48px; }
+  .s-head, .faq-l .s-head { font-size: clamp(28px, 8.2vw, 40px); }
+  .s-sub, .case-intro { font-size: 15px; }
+  .svc-item { grid-template-columns: 1fr; padding: 28px 0; }
+  .svc-num { padding-top: 0; }
+  .svc-item > div:last-child { grid-column: auto; }
+  .steps { grid-template-columns: 1fr; }
+  .step { padding: 22px 18px; }
+  .step:not(:last-child) .step-n::after { content: '↓'; }
+  .path-list { grid-template-columns: 1fr; border-top: none; border-left: var(--bd); margin-left: 4px; }
+  .path-list li { padding: 0 0 18px 20px; }
+  .path-list li::before { top: 4px; left: -5px; }
+  .case-meta { grid-template-columns: 1fr; }
+  .case-meta div + div { border-left: none; border-top: var(--bd); }
+  .story, .layers, .why-grid { grid-template-columns: 1fr; }
+  .why-card:not(:last-child)::after { display: grid; right: 18px; top: auto; bottom: -13px; }
+  .why-card:nth-child(2)::after { display: grid; }
+  .layers-title { margin-top: 56px; }
+  .work-dl div { grid-template-columns: 1fr; gap: 2px; }
+  .work-thumb.is-sheet { aspect-ratio: auto; }
+  .work-more, .work-more-list { grid-template-columns: 1fr; }
+  .work-more-k { padding-bottom: 0; }
+  .work-more-list li { border-left: none; }
+  .cform { padding: 22px 16px; }
+  .frow { grid-template-columns: 1fr; gap: 0; }
+  footer { padding: 24px 18px; }
+  .foot { flex-direction: column; align-items: flex-start; }
 }
-@media (max-width: 480px) {
-  .hero h1 { font-size: clamp(30px, 9vw, 42px); letter-spacing: -0.03em; }
-  .s-head { font-size: clamp(26px, 8vw, 36px); }
-  nav { padding: 0 16px; }
-  section { padding: 56px 16px; }
-  .cform { padding: 20px 14px; }
-  .about-l, .about-r { padding: 44px 16px; }
-  .pp-card { padding: 24px 16px; }
+@media (max-width: 400px) {
+  .nav-logo img { height: 24px; }
+  .nav-cta { font-size: 10px; padding: 0 10px; }
+  .hero-proof { grid-template-columns: 1fr; }
+  .hp-item:not(:last-child) .hp-k::after { content: ''; }
 }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .r { opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#main" data-i18n="a11y.skip">Aller au contenu</a>
 
-<!-- Custom cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<nav id="nav">
-  <a href="#" class="nav-logo">Ayoub<em>.</em></a>
-  <div class="nav-links">
-    <a href="#painpoints">Pour qui</a>
-    <a href="#services">Services</a>
-    <a href="#pricing">Tarifs</a>
-    <a href="#about">À propos</a>
-    <a href="#contact" class="nav-cta">Audit gratuit</a>
+<header class="nav" id="nav">
+  <a href="#top" class="nav-logo"><img src="/assets/logo-aanops.webp" alt="AANOPS" width="480" height="180"></a>
+  <div class="nav-right">
+    <nav class="nav-links" aria-label="Navigation principale" data-i18n-attr="aria-label:nav.label">
+      <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+      <a href="#method" data-i18n="nav.method">Méthode</a>
+      <a href="#ambia" data-i18n="nav.ambia">Étude de cas</a>
+      <a href="#work" data-i18n="nav.work">Réalisations</a>
+      <a href="#why" data-i18n="nav.about">À propos</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Langue" data-i18n-attr="aria-label:nav.lang">
+      <button type="button" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav.cta">Parlons-en</a>
+    <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+</header>
+
+<nav class="mob-menu" id="mobMenu" aria-label="Menu mobile" data-i18n-attr="aria-label:nav.mobile" hidden>
+  <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+  <a href="#method" data-i18n="nav.method">Méthode</a>
+  <a href="#ambia" data-i18n="nav.ambia">Étude de cas</a>
+  <a href="#work" data-i18n="nav.work">Réalisations</a>
+  <a href="#why" data-i18n="nav.about">À propos</a>
+  <a href="https://wa.me/33617933974?text=Bonjour%20AANOPS%2C%20j%27aimerais%20parler%20de%20mon%20activit%C3%A9." data-i18n-attr="href:wa.href" target="_blank" rel="noopener">WhatsApp ↗</a>
+  <a href="#contact" data-i18n="nav.ctaLong">Parler de votre activité →</a>
 </nav>
 
-<div class="mob-menu" id="mobMenu">
-  <a href="#painpoints">Pour qui</a>
-  <a href="#services">Services</a>
-  <a href="#pricing">Tarifs</a>
-  <a href="#about">À propos</a>
-  <a href="#contact" class="mob-cta">Audit gratuit →</a>
-</div>
+<main id="main">
 
 <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-inner">
-    <div class="hero-sys">
-      <div class="sys-dot"></div>
-      <span>Disponible · Lille, France</span>
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-sys"><span class="sys-dot" aria-hidden="true"></span><span>AANOPS · Business Systems &amp; Performance</span></p>
+      <h1 data-i18n-html="hero.title">Nous construisons les <span class="hl">systèmes</span> qui font mieux tourner les entreprises.</h1>
+      <p class="hero-lead" data-i18n-html="hero.lead">De la performance financière au logiciel sur mesure, AANOPS aide les entreprises à <strong>structurer leurs opérations, comprendre leurs chiffres</strong> et construire les outils dont elles ont besoin pour grandir.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-p" data-i18n="hero.cta1">Discuter de votre activité</a>
+        <a href="#ambia" class="btn-g" data-i18n="hero.cta2">Voir nos réalisations →</a>
+      </div>
+      <p class="hero-note" data-i18n="hero.note">Premier échange gratuit · 30&nbsp;min · Sans engagement</p>
     </div>
-    <h1>
-      J'automatise<br>
-      <span class="line2 scramble">vos processus</span>
-      <span class="line3">répétitifs.</span>
-    </h1>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-p">Audit gratuit — 30 min</a>
-      <a href="#painpoints" class="btn-g">C'est pour moi ? →</a>
-    </div>
-  </div>
-  <div class="scroll-cue"><span>scroll</span><div class="scroll-cue-line"></div></div>
-</section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item"><div class="marquee-dot"></div>Automatisation sur mesure</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Audit gratuit · 30 min</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Outils web sur mesure</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Dirigeants & Entrepreneurs</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Lille · France</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Réponse 48h</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Sans engagement</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Automatisation sur mesure</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Audit gratuit · 30 min</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Outils web sur mesure</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Dirigeants & Entrepreneurs</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Lille · France</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Réponse 48h</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Sans engagement</div>
+    <a class="hero-visual" href="#ambia">
+      <div class="shot hv-main">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>AMBIA POS · iPad</div>
+        <img src="/assets/work/ambia/pos-till.webp" width="1400" height="1238" fetchpriority="high"
+             alt="Caisse iPad AMBIA : catalogue mode et panier avec articles food et mode" data-i18n-attr="alt:hero.alt1">
+      </div>
+      <div class="shot hv-phone">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>Owner</div>
+        <img src="/assets/work/ambia/treasury-mobile.webp" width="780" height="1640"
+             alt="Espace dirigeant AMBIA sur mobile : trésorerie totale, banque, caisse et coffre" data-i18n-attr="alt:hero.alt2">
+      </div>
+      <span class="hv-caption"><span data-i18n="hero.caption">// Construit pour AMBIA</span> <span aria-hidden="true">→</span></span>
+    </a>
   </div>
-</div>
 
-<!-- PAIN POINTS -->
-<section id="painpoints">
-  <div class="s-inner">
-    <div class="s-num">01</div>
-    <div class="pp-header">
-      <div class="s-tag r">Pour qui</div>
-      <h2 class="s-head r r-d1">Vous vous <em>reconnaissez</em> ?</h2>
-      <p class="s-sub r r-d2">Si l'une de ces situations vous parle, on a matière à travailler ensemble.</p>
-    </div>
-  </div>
-  <div class="pp-grid">
-    <div class="pp-card r">
-      <div class="pp-card-num">// 001</div>
-      <div class="pp-card-title">Vous saisissez les mêmes données deux fois</div>
-      <div class="pp-card-desc">CRM, tableur, logiciel de facturation — chaque outil veut sa propre saisie. Vous perdez une heure par jour à copier-coller.</div>
-    </div>
-    <div class="pp-card r r-d1">
-      <div class="pp-card-num">// 002</div>
-      <div class="pp-card-title">Vos devis et factures prennent trop de temps</div>
-      <div class="pp-card-desc">Chaque document se fait à la main sous Word ou Excel. Pour chaque client, vous recommencez de zéro.</div>
-    </div>
-    <div class="pp-card r r-d2">
-      <div class="pp-card-num">// 003</div>
-      <div class="pp-card-title">Votre suivi client est éparpillé</div>
-      <div class="pp-card-desc">Emails, messages, post-its, tableur — vous ne savez plus où en est chaque dossier sans tout passer en revue.</div>
-    </div>
-    <div class="pp-card r r-d1">
-      <div class="pp-card-num">// 004</div>
-      <div class="pp-card-title">Votre reporting se fait manuellement</div>
-      <div class="pp-card-desc">Chaque mois, vous passez des heures à agréger des chiffres depuis plusieurs sources pour une vision globale.</div>
-    </div>
-    <div class="pp-card r r-d2">
-      <div class="pp-card-num">// 005</div>
-      <div class="pp-card-title">Vous gérez tout vous-même, faute de bon outil</div>
-      <div class="pp-card-desc">Pas les ressources pour embaucher, mais vous faites des tâches qu'un outil simple et fiable pourrait faire.</div>
-    </div>
-    <div class="pp-card r r-d3">
-      <div class="pp-card-num">// 006</div>
-      <div class="pp-card-title">Vous perdez du temps que vous n'avez pas</div>
-      <div class="pp-card-desc">Ce temps sur des tâches sans valeur ajoutée — c'est du temps en moins pour vos clients, votre stratégie, votre développement.</div>
-    </div>
-  </div>
-  <div class="pp-cta-row r r-d2">
-    <a href="#contact" class="btn-p">Identifier mes tâches à automatiser</a>
-    <span class="pp-note">// Gratuit · 30 min · Sans engagement</span>
+  <div class="wrap">
+    <ul class="hero-proof" aria-label="Business × Finance × Technologie × Opérations" data-i18n-attr="aria-label:hero.proofLabel">
+      <li class="hp-item"><div class="hp-k" data-i18n="hero.k1">Business</div><div class="hp-v" data-i18n="hero.p1">Comprendre le modèle, les clients et les priorités.</div></li>
+      <li class="hp-item"><div class="hp-k" data-i18n="hero.k2">Finance</div><div class="hp-v" data-i18n="hero.p2">Lire et construire les chiffres&nbsp;: marges, trésorerie, prévisionnel.</div></li>
+      <li class="hp-item"><div class="hp-k" data-i18n="hero.k3">Technologie</div><div class="hp-v" data-i18n="hero.p3">Concevoir et développer les outils sur mesure.</div></li>
+      <li class="hp-item"><div class="hp-k" data-i18n="hero.k4">Opérations</div><div class="hp-v" data-i18n="hero.p4">Mettre en place des process qui tiennent au quotidien.</div></li>
+    </ul>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="s-inner">
-    <div class="s-num">02</div>
-    <div class="svc-header">
-      <div class="s-tag r">Services</div>
-      <h2 class="s-head r r-d1">Trois étapes,<br><em>un parcours simple</em></h2>
-      <p class="s-sub r r-d2">Du diagnostic à la maintenance — vous vous concentrez sur votre métier.</p>
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="wrap">
+    <div class="split-head">
+      <div>
+        <p class="s-tag r" data-i18n="exp.tag">Expertise</p>
+        <h2 class="s-head r r-d1" data-i18n-html="exp.title">Quatre expertises,<br><em>un seul point de départ.</em></h2>
+        <p class="s-sub r r-d2" data-i18n="exp.sub">Votre activité. La technologie n'est pas le point de départ&nbsp;: on commence par comprendre comment l'entreprise fonctionne, puis on construit ce qui doit exister.</p>
+      </div>
+      <div class="approach r r-d2">
+        <div class="ap-cell">
+          <p class="ap-k" data-i18n="exp.q1k">// La question habituelle</p>
+          <p class="ap-q muted" data-i18n="exp.q1">«&nbsp;Quel site ou quel logiciel voulez-vous&nbsp;?&nbsp;»</p>
+        </div>
+        <div class="ap-cell acc">
+          <p class="ap-k" data-i18n="exp.q2k">// Notre question</p>
+          <p class="ap-q" data-i18n="exp.q2">«&nbsp;Comment fonctionne votre activité, où perdez-vous du temps, de l'argent ou de l'information — et quel système devrait exister&nbsp;?&nbsp;»</p>
+        </div>
+      </div>
     </div>
+
     <div class="svc-list">
-      <div class="svc-item r">
+      <article class="svc-item r">
         <div class="svc-num">01</div>
         <div>
-          <div class="svc-title">Audit Express</div>
-          <div class="svc-price">// GRATUIT · 30 MIN</div>
+          <h3 class="svc-title" data-i18n="exp.s1.title">Performance business &amp; financière</h3>
+          <p class="svc-kicker" data-i18n="exp.s1.kicker">Diagnostic · Prévisionnel · Trésorerie · KPI</p>
         </div>
         <div>
-          <p class="svc-desc">Un appel de 30 minutes pour identifier 1 ou 2 tâches qui vous prennent trop de temps. Vous repartez avec un diagnostic clair et un devis si vous voulez aller plus loin.</p>
-          <div class="svc-chips"><span class="chip">Sans engagement</span><span class="chip">Diagnostic inclus</span><span class="chip">Réponse 48h</span></div>
+          <p class="svc-desc" data-i18n="exp.s1.desc">Comprendre où l'entreprise gagne et perd de l'argent, puis mettre en place ce qu'il faut pour la piloter.</p>
+          <div class="chips" data-i18n-html="exp.s1.chips"><span class="chip">Diagnostic d'activité</span><span class="chip">Analyse financière</span><span class="chip">Modélisation &amp; prévisionnel</span><span class="chip">Trésorerie</span><span class="chip">Marges &amp; coûts</span><span class="chip">KPI &amp; tableaux de bord</span><span class="chip">Business plan</span></div>
         </div>
-      </div>
-      <div class="svc-item r r-d1">
+      </article>
+      <article class="svc-item r">
         <div class="svc-num">02</div>
         <div>
-          <div class="svc-title">Build</div>
-          <div class="svc-price">// À partir de 300 €</div>
+          <h3 class="svc-title" data-i18n="exp.s2.title">Systèmes métier</h3>
+          <p class="svc-kicker" data-i18n="exp.s2.kicker">Caisse · Stocks · Outils internes</p>
         </div>
         <div>
-          <p class="svc-desc">Conception et déploiement d'un outil sur-mesure. Automatisation de processus (facturation, reporting, documents) ou outil web (interfaces internes, dashboards, formulaires). Forfait fixé avant de commencer, livraison clé en main.</p>
-          <div class="svc-chips"><span class="chip">Sur mesure</span><span class="chip">Forfait fixe</span><span class="chip">Clé en main</span></div>
+          <p class="svc-desc" data-i18n="exp.s2.desc">Des outils construits autour de la façon dont votre activité fonctionne réellement — et non l'inverse.</p>
+          <div class="chips" data-i18n-html="exp.s2.chips"><span class="chip">Caisse (POS) sur mesure</span><span class="chip">Gestion de caisse &amp; clôtures</span><span class="chip">Stocks</span><span class="chip">Outils de gestion internes</span><span class="chip">CRM</span><span class="chip">Tableaux de bord opérationnels</span><span class="chip">Workflows</span></div>
         </div>
-      </div>
-      <div class="svc-item r r-d2">
+      </article>
+      <article class="svc-item r">
         <div class="svc-num">03</div>
         <div>
-          <div class="svc-title">Run</div>
-          <div class="svc-price">// À partir de 30 €/mois</div>
+          <h3 class="svc-title" data-i18n="exp.s3.title">Digital &amp; automatisation</h3>
+          <p class="svc-kicker" data-i18n="exp.s3.kicker">Web · Réservation · Automatisation</p>
         </div>
         <div>
-          <p class="svc-desc">Maintenance, corrections et ajustements quand votre process évolue. Sans engagement, vous arrêtez quand vous voulez.</p>
-          <div class="svc-chips"><span class="chip">Maintenance</span><span class="chip">Sans engagement</span><span class="chip">Corrections</span></div>
+          <p class="svc-desc" data-i18n="exp.s3.desc">Sites, applications et automatisations qui relient vos clients, vos données et vos équipes.</p>
+          <div class="chips" data-i18n-html="exp.s3.chips"><span class="chip">Applications web</span><span class="chip">Sites d'entreprise</span><span class="chip">Systèmes de réservation</span><span class="chip">Automatisation de process</span><span class="chip">Centralisation des données</span><span class="chip">Intégrations</span><span class="chip">Reporting automatisé</span></div>
         </div>
+      </article>
+      <article class="svc-item r">
+        <div class="svc-num">04</div>
+        <div>
+          <h3 class="svc-title" data-i18n="exp.s4.title">Opérations &amp; transformation</h3>
+          <p class="svc-kicker" data-i18n="exp.s4.kicker">Process · Structuration · Mise en place</p>
+        </div>
+        <div>
+          <p class="svc-desc" data-i18n="exp.s4.desc">Transformer des process manuels en systèmes clairs, mesurables et capables de suivre la croissance.</p>
+          <div class="chips" data-i18n-html="exp.s4.chips"><span class="chip">Design de process</span><span class="chip">Structuration opérationnelle</span><span class="chip">Analyse du modèle économique</span><span class="chip">Digitalisation</span><span class="chip">Déploiement de systèmes</span><span class="chip">Amélioration de la performance</span></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="exp-outcome r" data-i18n-html="exp.outcome">Selon le problème, la bonne réponse peut être <strong>un modèle financier, un tableau de bord, une caisse, une application web, un site, une automatisation ou une réorganisation</strong> — et souvent une combinaison. Nous ne vendons pas du logiciel pour le logiciel.</p>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section id="method">
+  <div class="wrap">
+    <div class="method-head">
+      <p class="s-tag r" data-i18n="met.tag">Méthode</p>
+      <h2 class="s-head r r-d1" data-i18n-html="met.title">Comprendre avant<br><em>de construire.</em></h2>
+      <p class="s-sub r r-d2" data-i18n="met.sub">Chaque projet suit le même fil, qu'il s'agisse d'un prévisionnel ou d'un logiciel.</p>
+    </div>
+    <ol class="steps r r-d1">
+      <li class="step"><p class="step-n">01</p><h3 data-i18n="met.1t">Comprendre</h3><p data-i18n="met.1d">On analyse l'activité, les chiffres et le terrain&nbsp;: comment ça fonctionne vraiment, et où ça coince.</p></li>
+      <li class="step"><p class="step-n">02</p><h3 data-i18n="met.2t">Structurer</h3><p data-i18n="met.2d">On définit le problème, les priorités, les indicateurs — et le système qui doit exister.</p></li>
+      <li class="step"><p class="step-n">03</p><h3 data-i18n="met.3t">Construire</h3><p data-i18n="met.3d">On construit l'outil — modèle financier, logiciel, site ou process — et on le met en place avec vous.</p></li>
+      <li class="step"><p class="step-n">04</p><h3 data-i18n="met.4t">Mesurer</h3><p data-i18n="met.4d">On suit ce qui compte&nbsp;: ventes, marges, trésorerie, délais, utilisation.</p></li>
+      <li class="step"><p class="step-n">05</p><h3 data-i18n="met.5t">Améliorer</h3><p data-i18n="met.5d">On ajuste à partir du réel. Le système évolue avec l'entreprise.</p></li>
+    </ol>
+
+    <div class="path r">
+      <div>
+        <h3 class="path-title" data-i18n="met.pathTitle">Comment démarre une collaboration</h3>
+        <a href="#contact" class="btn-p" data-i18n="met.cta">Commencer par un échange</a>
+      </div>
+      <ol class="path-list">
+        <li><p class="path-k">01</p><p class="path-t" data-i18n="met.p1t">Échange</p><p class="path-d" data-i18n="met.p1d">30&nbsp;min, gratuit, sans engagement.</p></li>
+        <li><p class="path-k">02</p><p class="path-t" data-i18n="met.p2t">Diagnostic</p><p class="path-d" data-i18n="met.p2d">On identifie le vrai problème.</p></li>
+        <li><p class="path-k">03</p><p class="path-t" data-i18n="met.p3t">Périmètre</p><p class="path-d" data-i18n="met.p3d">On définit ce qui doit être construit — et ce qui ne l'est pas.</p></li>
+        <li><p class="path-k">04</p><p class="path-t" data-i18n="met.p4t">Proposition</p><p class="path-d" data-i18n="met.p4d">Devis sur mesure et délai, puis validation et acompte.</p></li>
+        <li><p class="path-k">05</p><p class="path-t" data-i18n="met.p5t">Livraison</p><p class="path-d" data-i18n="met.p5d">Mise en place, prise en main, suivi.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY — AMBIA -->
+<section id="ambia">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <p class="s-tag r" data-i18n="amb.tag">Étude de cas</p>
+        <p class="case-kicker r" data-i18n="amb.kicker">AMBIA — Tétouan, Maroc</p>
+        <h2 class="s-head r r-d1" data-i18n-html="amb.title">Une infrastructure connectée<br><em>autour d'un concept store.</em></h2>
+      </div>
+      <div class="r r-d2">
+        <p class="case-intro" data-i18n-html="amb.intro">AMBIA réunit café &amp; food, mode et wellness. AANOPS n'a pas simplement «&nbsp;fait un site&nbsp;»&nbsp;: nous avons construit <strong>les systèmes financiers, opérationnels et digitaux</strong> qui permettent à ces trois activités de fonctionner ensemble.</p>
+        <dl class="case-meta">
+          <div><dt data-i18n="amb.m1k">Secteur</dt><dd data-i18n="amb.m1v">Retail · Restauration · Wellness</dd></div>
+          <div><dt data-i18n="amb.m2k">Périmètre</dt><dd data-i18n="amb.m2v">Finance · Systèmes · Digital · Opérations</dd></div>
+          <div><dt data-i18n="amb.m3k">En ligne</dt><dd><a href="https://ambia.ma" target="_blank" rel="noopener">ambia.ma ↗</a></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <ol class="story r">
+      <li><h3 data-i18n="amb.st1t">01 — L'entreprise</h3><p data-i18n="amb.st1d">AMBIA réunit trois activités sous un même toit&nbsp;: un coffee shop, une boutique de mode et un studio wellness (Pilates &amp; yoga).</p></li>
+      <li><h3 data-i18n="amb.st2t">02 — Le défi</h3><p data-i18n="amb.st2d">Trois activités, trois logiques&nbsp;: commandes et cuisine, stocks par taille et couleur, réservations de cours. Il fallait les faire fonctionner ensemble, avec une vision claire de l'argent au quotidien.</p></li>
+      <li><h3 data-i18n="amb.st3t">03 — Le système</h3><p data-i18n="amb.st3d">Plutôt qu'un outil isolé, un ensemble connecté&nbsp;: modèles financiers, caisse sur mesure, gestion de caisse et de trésorerie, réservation en ligne et outils de gestion.</p></li>
+      <li><h3 data-i18n="amb.st4t">04 — Le résultat</h3><p data-i18n="amb.st4d">Un environnement plus structuré et mesurable&nbsp;: ventes, caisse, stocks et réservations sont suivis dans des outils conçus autour du fonctionnement réel de l'activité.</p></li>
+    </ol>
+
+    <div class="gallery">
+      <figure class="g g-till r">
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>AMBIA POS · iPad</div>
+          <img src="/assets/work/ambia/pos-till.webp" width="1400" height="1238" loading="lazy"
+               alt="Caisse iPad AMBIA : catalogue mode et panier avec articles food et mode" data-i18n-attr="alt:hero.alt1">
+        </div>
+        <figcaption><b data-i18n="amb.g1k">Systèmes · Caisse</b><span data-i18n="amb.g1">Caisse iPad sur mesure&nbsp;: food et mode dans le même panier, commandes ouvertes et tickets cuisine.</span></figcaption>
+      </figure>
+      <figure class="g g-treasury r r-d1">
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>Owner</div>
+          <img src="/assets/work/ambia/treasury-mobile.webp" width="780" height="1640" loading="lazy"
+               alt="Espace dirigeant AMBIA sur mobile : trésorerie totale, banque, caisse et coffre" data-i18n-attr="alt:hero.alt2">
+        </div>
+        <figcaption><b data-i18n="amb.g2k">Finance · Trésorerie</b><span data-i18n="amb.g2">Espace dirigeant&nbsp;: trésorerie par compte — banque, caisse, coffre — et engagements à venir.</span></figcaption>
+      </figure>
+      <figure class="g g-web r">
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>ambia.ma</div>
+          <img src="/assets/work/ambia/booking-site-desktop.webp" width="1440" height="900" loading="lazy"
+               alt="Site ambia.ma : page Wellness et planning de la semaine" data-i18n-attr="alt:amb.a3">
+        </div>
+        <figcaption><b data-i18n="amb.g3k">Digital · Site &amp; réservation</b><span data-i18n="amb.g3">ambia.ma&nbsp;: le planning réel des cours, disponible en quatre langues.</span></figcaption>
+      </figure>
+      <figure class="g g-book r r-d1">
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i>ambia.ma</div>
+          <img src="/assets/work/ambia/booking-mobile.webp" width="780" height="1640" loading="lazy"
+               alt="Formulaire de réservation mobile ambia.ma : nom et numéro WhatsApp" data-i18n-attr="alt:amb.a4">
+        </div>
+        <figcaption><b data-i18n="amb.g4k">Digital · Mobile</b><span data-i18n="amb.g4">Réservation mobile sans compte&nbsp;: un nom, un numéro WhatsApp.</span></figcaption>
+      </figure>
+    </div>
+    <p class="gallery-note" data-i18n="amb.note">Captures réelles des outils AMBIA · catalogue et montants de démonstration</p>
+
+    <h3 class="layers-title r" data-i18n="amb.layersTitle">Ce qui a été construit</h3>
+    <div class="layers r r-d1">
+      <div class="layer">
+        <p class="mono-k">01</p>
+        <h4 data-i18n="amb.l1t">Finance &amp; performance</h4>
+        <ul class="dot-list" data-i18n-html="amb.l1"><li>Prévisionnel et analyse de projet</li><li>Analyse des coûts et des dépenses</li><li>Pricing food&nbsp;: recettes, ingrédients, marges</li><li>Suivi de trésorerie et clôtures de caisse</li></ul>
+      </div>
+      <div class="layer">
+        <p class="mono-k">02</p>
+        <h4 data-i18n="amb.l2t">Systèmes métier</h4>
+        <ul class="dot-list" data-i18n-html="amb.l2"><li>Caisse iPad sur mesure, utilisable hors ligne</li><li>Commandes ouvertes et tickets cuisine</li><li>Stocks mode et mouvements tracés</li><li>Ouverture et clôture de caisse</li><li>Trésorerie dirigeant et rapprochements</li></ul>
+      </div>
+      <div class="layer">
+        <p class="mono-k">03</p>
+        <h4 data-i18n="amb.l3t">Digital</h4>
+        <ul class="dot-list" data-i18n-html="amb.l3"><li>Site de réservation ambia.ma (FR, EN, ES, NL)</li><li>Réservation de cours via WhatsApp, sans compte</li><li>Back-office wellness relié à la caisse</li><li>Synchronisation entre appareils</li></ul>
+      </div>
+      <div class="layer">
+        <p class="mono-k">04</p>
+        <h4 data-i18n="amb.l4t">Opérations</h4>
+        <ul class="dot-list" data-i18n-html="amb.l4"><li>Routines d'ouverture et de fermeture</li><li>Règles boutique intégrées à la caisse</li><li>Rapports de ventes par activité</li><li>Accès séparés équipe / dirigeant</li></ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CASE STUDY -->
-<section id="case">
-  <div class="s-inner">
-    <div class="s-num">03</div>
-    <div class="case-layout">
-      <div class="r">
-        <div class="s-tag">Cas client</div>
-        <h2 class="case-title">Les Salons<br>de la Lys</h2>
-        <p class="case-sub">Location de décoration pour mariages et événements — Lille</p>
-        <div class="case-tag-row">
-          <span class="case-badge">Application web complète</span>
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="work-head">
+      <p class="s-tag r" data-i18n="work.tag">Réalisations</p>
+      <h2 class="s-head r r-d1" data-i18n-html="work.title">Au-delà d'AMBIA,<br><em>d'autres systèmes en place.</em></h2>
+      <p class="s-sub r r-d2" data-i18n="work.sub">Réparation, transport, événementiel&nbsp;: chaque projet part d'un problème réel d'entreprise.</p>
+    </div>
+
+    <div class="work-grid">
+      <!--
+        PROJECT CARD TEMPLATE — to add a project:
+        1. Copy one <article class="work-card"> block below.
+        2. Add a screenshot to /assets/work/<project>/ (WebP, 1400x875 / 16:10 reads best), or use the text "is-sheet" thumb when client data is confidential.
+        3. Write the French copy here, give each translated element a new data-i18n key (e.g. work.<project>.problem),
+           then add the English text for those keys in /assets/i18n.js.
+        4. Run: node scripts/check-i18n.mjs
+      -->
+      <article class="work-card r">
+        <div class="work-thumb"><img src="/assets/work/atelier-du-smartphone/bonus-reparation.webp" width="1400" height="875" loading="lazy" alt="Parcours bonus réparation sur tablette — Atelier du Smartphone" data-i18n-attr="alt:work.ads.alt"></div>
+        <div class="work-body">
+          <p class="work-ind" data-i18n="work.ads.ind">Réparation de smartphones · Commerce</p>
+          <h3>Atelier du Smartphone</h3>
+          <dl class="work-dl">
+            <div><dt data-i18n="work.lblProblem">Problème</dt><dd data-i18n="work.ads.problem">Factures et dossiers «&nbsp;bonus réparation&nbsp;» à préparer à la main pour chaque client.</dd></div>
+            <div><dt data-i18n="work.lblBuilt">Réalisé</dt><dd data-i18n="work.ads.built">Un parcours sur tablette — le technicien saisit l'appareil, le client complète et signe — qui génère l'attestation PDF, et un générateur de factures (IMEI, garantie, TVA, bonus réparation).</dd></div>
+            <div><dt data-i18n="work.lblOutcome">Résultat</dt><dd data-i18n="work.ads.outcome">Des documents complets et homogènes, produits au comptoir en quelques étapes.</dd></div>
+          </dl>
+          <div class="work-foot">
+            <div class="chips" data-i18n-html="work.ads.chips"><span class="chip">Systèmes</span><span class="chip">Automatisation</span></div>
+          </div>
         </div>
-        <a href="https://lessalonsdelalys.com" target="_blank" rel="noopener" class="case-url">↗ lessalonsdelalys.com</a>
-      </div>
-      <div class="r r-d1">
-        <p class="case-problem">Les Salons de la Lys gérait toute son activité à la main : demandes par téléphone, suivi sur papier, devis rédigés un par un sous Word. J'ai conçu une application web complète avec espace admin sécurisé.</p>
-        <div class="case-features">
-          <div class="case-feature"><div class="cf-dot"></div><span>Formulaire public de demande de devis avec deux parcours (sur-mesure & click & collect)</span></div>
-          <div class="case-feature"><div class="cf-dot"></div><span>Dashboard admin avec suivi des demandes par statut et recherche client</span></div>
-          <div class="case-feature"><div class="cf-dot"></div><span>Gestion d'inventaire complète en temps réel</span></div>
-          <div class="case-feature"><div class="cf-dot"></div><span>Calendrier des événements — évite les double-bookings</span></div>
-          <div class="case-feature"><div class="cf-dot"></div><span>Générateur de devis PDF automatique</span></div>
+      </article>
+
+      <article class="work-card r r-d1">
+        <div class="work-thumb is-sheet" aria-hidden="true">
+          <div class="sheet-bar"><i></i><i></i><i></i>JL_Transports_Diagnostic.xlsx</div>
+          <ul class="sheet-tabs" data-i18n-html="work.jl.sheet"><li>Trésorerie</li><li>Flux mensuels</li><li>Charges 2024 · 2025</li><li>Signaux d'alerte</li><li>Ratios &amp; score</li><li>Simulateur</li><li>BFR &amp; leasing</li></ul>
+          <p class="sheet-note" data-i18n="work.jl.note">Données client confidentielles — non affichées</p>
         </div>
-        <div class="case-result">
-          <div class="cr-label">// Résultat</div>
-          <div class="cr-text">Toute l'activité centralisée dans un seul outil. Plus de saisie en double. Devis générés en quelques clics au lieu de plusieurs minutes par dossier.</div>
+        <div class="work-body">
+          <p class="work-ind" data-i18n="work.jl.ind">Transport &amp; logistique</p>
+          <h3>JL Transports</h3>
+          <dl class="work-dl">
+            <div><dt data-i18n="work.lblProblem">Problème</dt><dd data-i18n="work.jl.problem">Besoin d'une lecture claire de la trésorerie, des charges et de la santé financière de l'entreprise.</dd></div>
+            <div><dt data-i18n="work.lblBuilt">Réalisé</dt><dd data-i18n="work.jl.built">Un diagnostic financier complet — tableau de bord de trésorerie, flux mensuels, charges, signaux d'alerte, ratios et simulateur, BFR &amp; leasing — et des modèles de facturation client.</dd></div>
+            <div><dt data-i18n="work.lblOutcome">Résultat</dt><dd data-i18n="work.jl.outcome">Une vision structurée des chiffres pour piloter la trésorerie et préparer les décisions.</dd></div>
+          </dl>
+          <div class="work-foot">
+            <div class="chips" data-i18n-html="work.jl.chips"><span class="chip">Finance</span><span class="chip">Tableaux de bord</span></div>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <article class="work-card r r-d2">
+        <div class="work-thumb"><img src="/assets/work/salons-de-la-lys/site.webp" width="1440" height="900" loading="lazy" alt="Site Les Salons de la Lys" data-i18n-attr="alt:work.lys.alt"></div>
+        <div class="work-body">
+          <p class="work-ind" data-i18n="work.lys.ind">Location de décoration événementielle · Lille</p>
+          <h3>Les Salons de la Lys</h3>
+          <dl class="work-dl">
+            <div><dt data-i18n="work.lblProblem">Problème</dt><dd data-i18n="work.lys.problem">Demandes par téléphone, suivi sur papier, devis rédigés un par un sous Word.</dd></div>
+            <div><dt data-i18n="work.lblBuilt">Réalisé</dt><dd data-i18n="work.lys.built">Un outil qui centralise demandes, clients, stock et calendrier, et génère les devis en PDF.</dd></div>
+            <div><dt data-i18n="work.lblOutcome">Résultat</dt><dd data-i18n="work.lys.outcome">Moins de papier, de ressaisie et d'oublis&nbsp;: l'activité se suit depuis un seul outil.</dd></div>
+          </dl>
+          <div class="work-foot">
+            <div class="chips" data-i18n-html="work.lys.chips"><span class="chip">Systèmes</span><span class="chip">Automatisation</span><span class="chip">Digital</span></div>
+            <a class="work-link" href="https://lessalonsdelalys.com" target="_blank" rel="noopener">lessalonsdelalys.com ↗</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="work-more r">
+      <p class="work-more-k" data-i18n="work.moreK">// Aussi réalisé</p>
+      <ul class="work-more-list">
+        <li><strong>FitaNubian</strong><span data-i18n="work.fita">Studio de pilates au féminin, Lille — site avec réservation, abonnements, blog et boutique, puis audit et corrections avant ouverture.</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="s-inner">
-    <div class="s-num">04</div>
-    <div class="pricing-header">
-      <div class="s-tag r">Investissement</div>
-      <h2 class="s-head r r-d1">Tarifs clairs,<br><em>sans surprise</em></h2>
-      <p class="s-sub r r-d2">Pas de devis à l'aveugle, pas d'engagement avant d'avoir vu la proposition.</p>
-    </div>
-    <div class="pricing-table r r-d2">
-      <div class="pr-row">
-        <div><div class="pr-title">Audit Express</div><div class="pr-desc">Appel de 30 min pour identifier vos tâches chronophages et poser un diagnostic.</div></div>
-        <div class="pr-price">Gratuit</div>
-      </div>
-      <div class="pr-row">
-        <div><div class="pr-title">Build</div><div class="pr-desc">Conception et déploiement d'un outil sur-mesure. Forfait fixé avant de commencer.</div></div>
-        <div class="pr-price">Dès 300 €</div>
-      </div>
-      <div class="pr-row">
-        <div><div class="pr-title">Run</div><div class="pr-desc">Maintenance, corrections et ajustements. Sans engagement.</div></div>
-        <div class="pr-price">Dès 30 €/mois</div>
-      </div>
-    </div>
-    <p class="pr-note r r-d3">// Chaque projet commence par un audit gratuit de 30 min. Aucune surprise côté budget.</p>
-  </div>
-</section>
+<!-- WHY AANOPS / ABOUT -->
+<section id="why">
+  <div class="wrap">
+    <p class="s-tag r" data-i18n="why.tag">Pourquoi AANOPS</p>
+    <h2 class="s-head r r-d1" data-i18n-html="why.title">Une stratégie est plus utile<br><em>quand on peut l'exécuter.</em></h2>
+    <p class="s-sub r r-d2" data-i18n="why.sub">Analyser une entreprise et construire ses outils sont souvent deux métiers séparés. Chez AANOPS, c'est le même travail.</p>
 
-<!-- PROCESS -->
-<section id="process">
-  <div class="s-inner">
-    <div class="s-num">05</div>
-    <div class="process-header">
-      <div class="s-tag r">Comment ça marche</div>
-      <h2 class="s-head r r-d1">De l'audit à la<br><em>livraison en 3 étapes</em></h2>
-      <p class="s-sub r r-d2">Voilà exactement ce qui se passe après votre premier message.</p>
-    </div>
-    <div class="process-steps r r-d2">
-      <div class="ps">
-        <div class="ps-n">01</div>
-        <div class="ps-title">Audit gratuit (30 min)</div>
-        <div class="ps-desc">On fait le point sur vos processus par appel ou visio. J'identifie avec vous les tâches les plus chronophages. Vous repartez avec un diagnostic clair — même si vous n'allez pas plus loin.</div>
-      </div>
-      <div class="ps">
-        <div class="ps-n">02</div>
-        <div class="ps-title">Proposition & devis fixe</div>
-        <div class="ps-desc">Sous 48h, vous recevez une proposition détaillée avec le périmètre exact, le délai de livraison et un forfait fixe. Vous validez avant que je commence.</div>
-      </div>
-      <div class="ps">
-        <div class="ps-n">03</div>
-        <div class="ps-title">Livraison & prise en main</div>
-        <div class="ps-desc">Je construis l'outil, vous le testez, on ajuste. Livraison clé en main avec explication complète. Et si vous voulez, je reste disponible en maintenance mensuelle.</div>
-      </div>
-    </div>
-    <div class="process-cta r r-d3">
-      <a href="#contact" class="btn-p">Démarrer par l'audit gratuit</a>
-    </div>
-  </div>
-</section>
+    <ul class="why-grid r r-d1">
+      <li class="why-card"><h3 data-i18n="why.1t">Réflexion business</h3><p data-i18n="why.1d">On part du modèle économique, des clients et des priorités — pas d'une liste de fonctionnalités.</p></li>
+      <li class="why-card"><h3 data-i18n="why.2t">Compréhension financière</h3><p data-i18n="why.2d">Marges, coûts, trésorerie, prévisionnel&nbsp;: les chiffres guident ce qu'on construit.</p></li>
+      <li class="why-card"><h3 data-i18n="why.3t">Technologie</h3><p data-i18n="why.3d">Caisse, applications web, sites, automatisations&nbsp;: nous développons les outils nous-mêmes.</p></li>
+      <li class="why-card"><h3 data-i18n="why.4t">Exécution</h3><p data-i18n="why.4d">Mise en place, prise en main, ajustements — jusqu'à ce que ça fonctionne au quotidien.</p></li>
+    </ul>
 
-<!-- ABOUT -->
-<section id="about" style="padding:0">
-  <div class="about-grid">
-    <div class="about-l r">
-      <div class="about-l-deco"></div>
-      <div class="about-l-label">// CITATION</div>
-      <div class="about-quote">
-        <span class="aq-mark">"</span>
-        J'ai vu des dirigeants perdre des heures sur des tâches qu'un outil simple pourrait faire en secondes.
-      </div>
-      <div class="about-author">— C'est pour ça que j'automatise.</div>
-    </div>
-    <div class="about-r">
-      <div class="s-tag r">À propos</div>
-      <h3 class="about-name r r-d1">Ayoub Ait Nacer</h3>
-      <p class="about-p r r-d2">Étudiant en dernière année à l'EDHEC Business School (Corporate Finance), je conçois en parallèle des outils sur-mesure pour automatiser les tâches répétitives des dirigeants et entrepreneurs.</p>
-      <p class="about-p r r-d2">Mon parcours : contrôle financier chez EY Luxembourg, accompagnement de clients en cabinet d'expertise comptable — et aujourd'hui des projets d'automatisation pour des entrepreneurs sur des problématiques concrètes.</p>
-      <div class="timeline r r-d3">
-        <div class="tl-item"><div class="tl-label">Formation</div><div class="tl-text">EDHEC Business School — Corporate Finance</div></div>
-        <div class="tl-item"><div class="tl-label">Contrôle financier</div><div class="tl-text">EY Luxembourg — Reporting & analyse financière</div></div>
-        <div class="tl-item"><div class="tl-label">Cabinet comptable</div><div class="tl-text">Accompagnement de clients en expertise comptable</div></div>
-        <div class="tl-item"><div class="tl-label">Aujourd'hui</div><div class="tl-text">Automatisation sur mesure pour dirigeants et entrepreneurs</div></div>
+    <div class="founder r">
+      <p class="mono-k" data-i18n="why.founderK">// Derrière AANOPS</p>
+      <div>
+        <p data-i18n-html="why.founder">Fondée par <strong>Ayoub Ait Nacer</strong> — parcours en finance d'entreprise (EDHEC), contrôle financier (EY Luxembourg) et cabinet d'expertise comptable.</p>
+        <div class="founder-links">
+          <span data-i18n="why.loc">Basé à Lille · Projets en France et à l'international</span>
+          <a href="https://www.linkedin.com/in/ayoubaitnacer/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
       </div>
     </div>
   </div>
@@ -784,35 +950,32 @@ footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); le
 
 <!-- FAQ -->
 <section id="faq">
-  <div class="s-inner">
-    <div class="s-num">06</div>
-    <div class="faq-layout">
-      <div class="faq-l r">
-        <div class="s-tag">FAQ</div>
-        <h2 class="s-head" style="font-size:clamp(28px,3vw,44px)">Questions<br><em>fréquentes</em></h2>
-        <p style="font-size:13px;color:var(--dim);line-height:1.7;font-weight:300;margin-top:16px;max-width:240px;">Pas de réponse ici ? Écrivez-moi directement.</p>
+  <div class="wrap faq-layout">
+    <div class="faq-l r">
+      <p class="s-tag" data-i18n="faq.tag">FAQ</p>
+      <h2 class="s-head" data-i18n-html="faq.title">Questions<br><em>fréquentes</em></h2>
+      <p class="s-sub" data-i18n-html="faq.sub">Une autre question&nbsp;? Écrivez-nous sur <a href="https://wa.me/33617933974?text=Bonjour%20AANOPS%2C%20j%27aimerais%20parler%20de%20mon%20activit%C3%A9." target="_blank" rel="noopener">WhatsApp</a> ou par <a href="mailto:ay.aitnacer@gmail.com">email</a>.</p>
+    </div>
+    <div class="faq-list r r-d1">
+      <div class="faq-item">
+        <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1"><span data-i18n="faq.1q">Je ne sais pas exactement ce dont j'ai besoin. Est-ce un problème&nbsp;?</span><span class="faq-icon" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><p data-i18n="faq.1a">Non, c'est même le point de départ le plus fréquent. Vous connaissez vos difficultés ; notre rôle est d'identifier la bonne solution — qui n'est pas toujours un logiciel.</p></div>
       </div>
-      <div class="faq-list r r-d1">
-        <div class="faq-item">
-          <button class="faq-q">Est-ce que c'est vraiment gratuit pour l'audit ? <span class="faq-icon">+</span></button>
-          <div class="faq-a">Oui, sans condition. L'audit de 30 min est entièrement gratuit et sans engagement. Son but est de comprendre votre situation et de voir si on peut travailler ensemble. Si je ne peux pas vous aider, je vous le dis clairement.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Est-ce que je dois être technique pour travailler avec vous ? <span class="faq-icon">+</span></button>
-          <div class="faq-a">Non, aucune connaissance technique n'est requise. Mon rôle est précisément de traduire vos problèmes métier en solutions fonctionnelles. Vous décrivez votre process, je m'occupe du reste.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Combien de temps dure une mission Build ? <span class="faq-icon">+</span></button>
-          <div class="faq-a">En général entre 1 et 4 semaines selon la complexité. Le délai est fixé dans la proposition avant le début de la mission.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Que se passe-t-il si l'outil ne me convient pas ? <span class="faq-icon">+</span></button>
-          <div class="faq-a">On prévoit toujours une phase de test et d'ajustements avant la livraison finale. Si quelque chose ne correspond pas au cahier des charges validé, je le corrige sans frais supplémentaires.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Je ne sais pas exactement ce que je veux automatiser. Est-ce un problème ? <span class="faq-icon">+</span></button>
-          <div class="faq-a">C'est même l'objectif de l'audit : vous aider à identifier ça. Vous connaissez vos douleurs, pas forcément les solutions. C'est mon travail de faire le lien entre les deux.</div>
-        </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2"><span data-i18n="faq.2q">Avec quel type d'entreprises travaillez-vous&nbsp;?</span><span class="faq-icon" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><p data-i18n="faq.2a">PME, entrepreneurs, commerces, cafés et restaurants, hôtellerie, entreprises de services et entreprises en croissance. Le point commun&nbsp;: des opérations à structurer et des chiffres à mieux piloter.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3"><span data-i18n="faq.3q">Combien coûte un projet&nbsp;?</span><span class="faq-icon" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><p data-i18n="faq.3a">Il n'y a pas de grille tarifaire publique&nbsp;: chaque entreprise est différente. Après le diagnostic, nous définissons le périmètre ensemble, puis vous recevez une proposition et un devis sur mesure. Rien ne démarre sans votre validation.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4"><span data-i18n="faq.4q">Faut-il être à l'aise avec la technique&nbsp;?</span><span class="faq-icon" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><p data-i18n="faq.4a">Non. Vous décrivez votre activité, nous la traduisons en système concret et nous vous accompagnons dans la prise en main.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5"><span data-i18n="faq.5q">Que se passe-t-il après la livraison&nbsp;?</span><span class="faq-icon" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><p data-i18n="faq.5a">Nous pouvons assurer le suivi, la maintenance et les évolutions du système, selon vos besoins. Une entreprise change&nbsp;: ses outils doivent pouvoir suivre.</p></div>
       </div>
     </div>
   </div>
@@ -820,150 +983,245 @@ footer small { font-family: var(--mono); font-size: 10px; color: var(--dim2); le
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-glow"></div>
-  <div class="s-tag r">Contact</div>
-  <h2 class="s-head r r-d1">Réservez votre<br><em>audit gratuit</em></h2>
-  <p class="s-sub r r-d1" style="margin-bottom:56px;">30 minutes. Gratuit. Sans engagement.</p>
-  <div class="contact-inner">
-    <div class="r r-d1">
-      <div class="ci-left">
-        <h3>Ce qui vous attend</h3>
-        <p>Un appel de 30 minutes, pas un argumentaire commercial. On regarde ensemble vos process, et je vous dis franchement ce qui peut être automatisé.</p>
-        <div class="promises">
-          <div class="promise"><div class="pm-icon"><svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pm-text"><strong>Un diagnostic clair</strong> — les 1 ou 2 tâches qui vous coûtent le plus de temps</div></div>
-          <div class="promise"><div class="pm-icon"><svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pm-text"><strong>Une estimation honnête</strong> — ce que ça prendrait de résoudre, et pour combien</div></div>
-          <div class="promise"><div class="pm-icon"><svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pm-text"><strong>Zéro pression</strong> — vous partez avec les infos, vous décidez ensuite</div></div>
-        </div>
-        <div class="avail-badge"><div class="avail-dot"></div>Disponible · Réponse sous 24h en semaine</div>
+  <div class="wrap">
+    <p class="s-tag r" data-i18n="ct.tag">Contact</p>
+    <h2 class="s-head r r-d1" data-i18n-html="ct.title">Parlons de<br><em>votre activité.</em></h2>
+    <p class="s-sub r r-d2" data-i18n="ct.sub">Quelques lignes suffisent&nbsp;: comment fonctionne votre entreprise et ce qui coince. Réponse sous 24&nbsp;h ouvrées.</p>
+    <div class="ct-quick r r-d2">
+      <a class="btn-g btn-wa" href="https://wa.me/33617933974?text=Bonjour%20AANOPS%2C%20j%27aimerais%20parler%20de%20mon%20activit%C3%A9." data-i18n-attr="href:wa.href" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span data-i18n="wa.cta">Écrire sur WhatsApp</span></a>
+      <span class="ct-quick-note" data-i18n="wa.note">Plutôt WhatsApp&nbsp;? Écrivez-nous directement, sans formulaire.</span>
+    </div>
+
+    <div class="contact-inner">
+      <div class="ci-left r r-d1">
+        <h3 data-i18n="ct.signalsTitle">C'est souvent le bon moment quand…</h3>
+        <ul class="dot-list" data-i18n-html="ct.signals"><li>Trop de choses passent par WhatsApp, le papier ou Excel</li><li>Vos outils ne se parlent pas entre eux</li><li>Vos chiffres arrivent trop tard — ou pas du tout</li><li>Vous lancez un concept et devez tout structurer</li></ul>
+        <p class="ci-promise" data-i18n="ct.promise">Le premier échange est gratuit et sans engagement. Si nous ne sommes pas la bonne réponse à votre besoin, nous vous le dirons.</p>
         <div class="ci-links">
-          <a href="/cdn-cgi/l/email-protection#6a0b13051f08440b031e040b090f182a0f0e1f440f0e020f0944090507" class="ci-link">
-            <div class="ci-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6b72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 7 10 7 10-7"/></svg></div>
-            <div><div class="cl-name">Email</div><div class="cl-val"><span class="__cf_email__" data-cfemail="e5849c8a9087cb848c918b84868097a5808190cb80818d8086cb868a88">[email&#160;protected]</span></div></div>
+          <a href="https://wa.me/33617933974?text=Bonjour%20AANOPS%2C%20j%27aimerais%20parler%20de%20mon%20activit%C3%A9." data-i18n-attr="href:wa.href" target="_blank" rel="noopener" class="ci-link">
+            <span class="ci-link-icon" aria-hidden="true" style="color:#10b981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+            <span><span class="cl-name">WhatsApp</span><span class="cl-val" style="display:block">+33 6 17 93 39 74</span></span>
+          </a>
+          <a href="mailto:ay.aitnacer@gmail.com" class="ci-link">
+            <span class="ci-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#8f8f9d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 7 10 7 10-7"/></svg></span>
+            <span><span class="cl-name" data-i18n="ct.email">Email</span><span class="cl-val" style="display:block">ay.aitnacer@gmail.com</span></span>
           </a>
           <a href="https://www.linkedin.com/in/ayoubaitnacer/" target="_blank" rel="noopener" class="ci-link">
-            <div class="ci-link-icon"><svg viewBox="0 0 24 24" fill="#6b6b72"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-            <div><div class="cl-name">LinkedIn</div><div class="cl-val">Réponse rapide</div></div>
+            <span class="ci-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#8f8f9d"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></span>
+            <span><span class="cl-name">LinkedIn</span><span class="cl-val" style="display:block" data-i18n="ct.linkedinVal">Ayoub Ait Nacer · fondateur</span></span>
           </a>
         </div>
       </div>
-    </div>
-    <div class="cform r r-d2">
-      <form id="contactForm" novalidate>
-        <div class="cform-title">Réserver l'appel</div>
-        <div class="cform-sub">// 2 champs · 30 secondes · Je vous réponds avec des créneaux</div>
-        <div class="frow">
-          <div class="fg"><label class="fl" for="firstName">Prénom *</label><input class="fi" type="text" id="firstName" name="firstName" placeholder="Jean" autocomplete="given-name" required></div>
-          <div class="fg"><label class="fl" for="email">Email *</label><input class="fi" type="email" id="email" name="email" placeholder="jean@entreprise.fr" autocomplete="email" required></div>
-        </div>
-        <div class="fg">
-          <label class="fl" for="message">Ce qui vous prend le plus de temps <span style="color:var(--dim2)">(optionnel)</span></label>
-          <textarea class="ft" id="message" name="message" placeholder="Ex : je passe 2h par semaine à ressaisir des données entre mes outils…"></textarea>
-        </div>
-        <button type="submit" class="btn-submit" id="submitBtn">Réserver mon audit gratuit →</button>
-        <div class="form-reassure">
-          <span>Gratuit</span><span>Sans engagement</span><span>Réponse sous 24h</span>
-        </div>
-      </form>
+
+      <div class="cform r r-d2">
+        <form id="contactForm" action="https://formspree.io/f/maqllvqa" method="POST" novalidate>
+          <h3 class="cform-title" data-i18n="form.title">Parlez-nous de votre activité</h3>
+          <p class="cform-sub" data-i18n="form.sub">1 minute · Réponse sous 24&nbsp;h ouvrées</p>
+
+          <div class="frow">
+            <div class="fg">
+              <label class="fl" for="f-name"><span data-i18n="form.name">Nom</span> <span class="req" aria-hidden="true">*</span></label>
+              <input class="fi" type="text" id="f-name" name="name" autocomplete="name" required placeholder="Prénom Nom" data-i18n-attr="placeholder:form.namePh">
+            </div>
+            <div class="fg">
+              <label class="fl" for="f-company"><span data-i18n="form.company">Entreprise</span> <span class="opt" data-i18n="form.optional">(optionnel)</span></label>
+              <input class="fi" type="text" id="f-company" name="company" autocomplete="organization" placeholder="Nom de l'entreprise" data-i18n-attr="placeholder:form.companyPh">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl" for="f-contact"><span data-i18n="form.contact">Email ou WhatsApp</span> <span class="req" aria-hidden="true">*</span></label>
+            <input class="fi" type="text" id="f-contact" name="contact" autocomplete="email" inputmode="email" required placeholder="vous@entreprise.fr ou +33 6 …" data-i18n-attr="placeholder:form.contactPh">
+          </div>
+          <fieldset class="fg">
+            <legend class="fl" data-i18n="form.need">Sur quoi avez-vous besoin d'aide&nbsp;?</legend>
+            <div class="needs">
+              <label class="need"><input type="radio" name="need" value="Finance &amp; performance"><span data-i18n="form.n1">Finance &amp; performance</span></label>
+              <label class="need"><input type="radio" name="need" value="Business systems"><span data-i18n="form.n2">Systèmes métier</span></label>
+              <label class="need"><input type="radio" name="need" value="Web &amp; digital"><span data-i18n="form.n3">Web &amp; digital</span></label>
+              <label class="need"><input type="radio" name="need" value="Automation"><span data-i18n="form.n4">Automatisation</span></label>
+              <label class="need unsure"><input type="radio" name="need" value="Not sure yet"><span data-i18n="form.n5">Je ne sais pas encore</span></label>
+            </div>
+          </fieldset>
+          <div class="fg">
+            <label class="fl" for="f-message"><span data-i18n="form.msg">Quelques mots sur votre activité</span> <span class="opt" data-i18n="form.optional">(optionnel)</span></label>
+            <textarea class="ft" id="f-message" name="message" placeholder="Ex : nous prenons les commandes sur WhatsApp et suivons la caisse sur un tableur…" data-i18n-attr="placeholder:form.msgPh"></textarea>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="f-gotcha">Ne pas remplir</label><input type="text" id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+
+          <button type="submit" class="btn-p btn-submit" id="submitBtn" data-i18n="form.submit">Envoyer ma demande →</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+          <p class="form-reassure" data-i18n="form.reassure">Gratuit · Sans engagement · Confidentiel</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer>
-  <span class="f-logo">Ayoub<em>.</em>AitNacer</span>
-  <small>© 2026 · Automatisation sur mesure — Lille, France</small>
+  <div class="wrap foot">
+    <img src="/assets/logo-aanops.webp" alt="AANOPS" width="480" height="180" loading="lazy">
+    <nav aria-label="Liens de pied de page" data-i18n-attr="aria-label:foot.label">
+      <a href="#ambia" data-i18n="nav.ambia">Étude de cas</a>
+      <a href="#contact" data-i18n="nav.cta">Parlons-en</a>
+      <a href="https://wa.me/33617933974?text=Bonjour%20AANOPS%2C%20j%27aimerais%20parler%20de%20mon%20activit%C3%A9." data-i18n-attr="href:wa.href" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/ayoubaitnacer/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <small>© 2026 AANOPS · Business Systems &amp; Performance · Lille, France</small>
+  </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
-// ── CURSOR ──
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let rx = 0, ry = 0, mx = 0, my = 0;
-const isMobile = () => window.matchMedia('(pointer: coarse)').matches;
+<script src="/assets/i18n.js"></script>
+<script>
+document.documentElement.classList.add('js');
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-});
-(function animRing() {
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(animRing);
+// ── I18N ──
+// French is written directly in the HTML and captured here as the source language.
+// Other languages live in /assets/i18n.js (window.AANOPS_I18N). To add one, add its dictionary there and a button in .lang-switch.
+const I18N = (function () {
+  const dicts = window.AANOPS_I18N || {};
+  const fr = Object.assign({}, dicts.fr || {});
+  const SUPPORTED = ['fr'].concat(Object.keys(dicts).filter(l => l !== 'fr'));
+  const metaDesc = document.querySelector('meta[name="description"]');
+  fr['meta.title'] = document.title;
+  fr['meta.description'] = metaDesc.content;
+  document.querySelectorAll('[data-i18n]').forEach(el => { fr[el.dataset.i18n] = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { fr[el.dataset.i18nHtml] = el.innerHTML; });
+  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    el.dataset.i18nAttr.split(';').forEach(pair => {
+      const [attr, key] = pair.split(':');
+      if (!(key in fr)) fr[key] = el.getAttribute(attr);
+    });
+  });
+  dicts.fr = fr;
+
+  let current = 'fr';
+  const t = key => (dicts[current] && dicts[current][key] != null ? dicts[current][key] : fr[key]) || '';
+
+  function apply(lang) {
+    if (SUPPORTED.indexOf(lang) === -1) lang = 'fr';
+    current = lang;
+    document.documentElement.lang = lang;
+    document.title = t('meta.title');
+    metaDesc.content = t('meta.description');
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      el.dataset.i18nAttr.split(';').forEach(pair => { const [attr, key] = pair.split(':'); el.setAttribute(attr, t(key)); });
+    });
+    document.querySelectorAll('.lang-switch [data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    document.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(b => { const a = document.getElementById(b.getAttribute('aria-controls')); a.style.maxHeight = a.scrollHeight + 'px'; });
+    document.documentElement.classList.remove('i18n-pending');
+  }
+
+  function detect() {
+    const q = new URLSearchParams(location.search).get('lang');
+    let stored = null; try { stored = localStorage.getItem('aanops-lang'); } catch (e) {}
+    const nav = ((navigator.languages && navigator.languages[0]) || navigator.language || 'fr').slice(0, 2).toLowerCase();
+    return [q, stored, SUPPORTED.indexOf(nav) > -1 ? nav : 'en'].find(l => l && SUPPORTED.indexOf(l) > -1) || 'fr';
+  }
+
+  function set(lang) {
+    apply(lang);
+    try { localStorage.setItem('aanops-lang', lang); } catch (e) {}
+    const url = new URL(location.href);
+    if (lang === 'fr') url.searchParams.delete('lang'); else url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url);
+  }
+
+  document.querySelectorAll('.lang-switch [data-lang]').forEach(b => b.addEventListener('click', () => set(b.dataset.lang)));
+  apply(detect());
+  return { t, get lang() { return current; } };
 })();
-document.querySelectorAll('a, button, .pp-card, .svc-item, .ps, .pr-row, .tl-item').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('hov'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('hov'));
-});
 
-// ── SCRAMBLE ──
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@%&';
-function scramble(el) {
-  const orig = el.textContent;
-  let iter = 0;
-  const interval = setInterval(() => {
-    el.textContent = orig.split('').map((c, i) => {
-      if (c === ' ') return ' ';
-      if (i < iter) return orig[i];
-      return chars[Math.floor(Math.random() * chars.length)];
-    }).join('');
-    if (iter >= orig.length) { el.textContent = orig; clearInterval(interval); }
-    iter += 0.5;
-  }, 40);
-}
-window.addEventListener('load', () => {
-  setTimeout(() => document.querySelectorAll('.scramble').forEach(el => scramble(el)), 700);
-});
-
-// ── NAV ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
-
-// ── MOBILE MENU ──
+// ── NAV / MOBILE MENU ──
 const burger = document.getElementById('burger');
 const mobMenu = document.getElementById('mobMenu');
-burger.addEventListener('click', () => {
-  const open = mobMenu.classList.toggle('open');
-  burger.classList.toggle('open', open);
+function setMenu(open) {
+  mobMenu.hidden = !open;
   burger.setAttribute('aria-expanded', String(open));
-});
-mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  mobMenu.classList.remove('open'); burger.classList.remove('open');
-  burger.setAttribute('aria-expanded', 'false');
-}));
+}
+burger.addEventListener('click', () => setMenu(mobMenu.hidden));
+mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !mobMenu.hidden) { setMenu(false); burger.focus(); } });
+window.addEventListener('resize', () => { if (window.innerWidth > 1024) setMenu(false); }, { passive: true });
 
 // ── REVEAL ──
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }});
-}, {threshold: 0.1});
-document.querySelectorAll('.r').forEach(el => obs.observe(el));
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+} else {
+  document.querySelectorAll('.r').forEach(el => el.classList.add('in'));
+}
 
 // ── FAQ ──
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
-    const isOpen = btn.classList.contains('open');
-    document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
-    if (!isOpen) { btn.classList.add('open'); btn.nextElementSibling.classList.add('open'); }
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      document.getElementById(b.getAttribute('aria-controls')).style.maxHeight = '0px';
+    });
+    if (!open) {
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
   });
 });
 
-// ── CONTACT FORM ──
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+// ── CONTACT FORM (Formspree) ──
+(function () {
+  const form = document.getElementById('contactForm');
   const btn = document.getElementById('submitBtn');
-  const data = new FormData(this);
-  const email = data.get('email') || '';
-  const firstName = data.get('firstName') || '';
-  if (!firstName.trim() || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-  btn.disabled = true; btn.textContent = 'Envoi en cours…';
-  fetch('https://formspree.io/f/maqllvqa', {
-    method: 'POST', headers: {'Accept':'application/json'}, body: data
-  }).then(() => {
-    btn.textContent = 'Message envoyé ✓'; this.reset();
-    setTimeout(() => { btn.textContent = 'Réserver mon audit gratuit →'; btn.disabled = false; }, 4000);
-  }).catch(() => {
-    btn.textContent = 'Erreur — réessayez'; btn.style.background = '#ef4444'; btn.disabled = false;
-    setTimeout(() => { btn.textContent = 'Réserver mon audit gratuit →'; btn.style.background = ''; }, 3000);
+  const status = document.getElementById('formStatus');
+  const nameInput = document.getElementById('f-name');
+  const contactInput = document.getElementById('f-contact');
+
+  function showStatus(key, kind) {
+    status.textContent = I18N.t(key);
+    status.className = 'form-status ' + kind;
+    status.hidden = false;
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const contact = String(data.get('contact') || '').trim();
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+    const isPhone = /^\+?[\d\s().-]{8,}$/.test(contact) && contact.replace(/\D/g, '').length >= 8;
+    nameInput.setAttribute('aria-invalid', String(!name));
+    contactInput.setAttribute('aria-invalid', String(!(isEmail || isPhone)));
+    if (!name || !(isEmail || isPhone)) {
+      showStatus('form.invalid', 'err');
+      (!name ? nameInput : contactInput).focus();
+      return;
+    }
+    if (isEmail) data.set('email', contact); else data.set('whatsapp', contact);
+    const company = String(data.get('company') || '').trim();
+    data.set('_subject', 'AANOPS — ' + name + (company ? ' · ' + company : ''));
+    data.set('language', I18N.lang);
+
+    btn.disabled = true;
+    btn.textContent = I18N.t('form.sending');
+    status.hidden = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.reset();
+      showStatus('form.success', 'ok');
+    } catch (err) {
+      showStatus('form.error', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = I18N.t('form.submit');
+    }
   });
-});
+})();
 </script>
 </body>
 </html>
