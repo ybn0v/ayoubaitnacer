@@ -101,7 +101,7 @@ section{padding:130px 0}
 .open .btn:hover{box-shadow:7px 7px 0 var(--ink)}
 
 .case{display:grid;gap:44px;align-items:center;padding:70px 0;border-top:2px solid var(--rule)}
-.case.flip{border-bottom:2px solid var(--rule)}
+.case.last{border-bottom:2px solid var(--rule)}
 .case>*{min-width:0}
 @media(min-width:900px){.case{grid-template-columns:1fr 1fr;gap:80px}.case.flip .vis{order:2}}
 .case h3{font-size:clamp(2.2rem,4.4vw,3.4rem);margin:8px 0 18px}
@@ -238,7 +238,7 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
 .clients .w{flex-wrap:nowrap;align-items:center}
 .clients p{white-space:nowrap;margin-right:20px}
 @keyframes marquee{to{transform:translateX(-50%)}}
-.clients ul li::after{content:"✦";color:var(--emerald);margin-left:40px;font-size:.7rem;vertical-align:middle}
+.clients ul{align-items:center;gap:0}.clients ul li{display:flex;align-items:center;padding:0 34px}.clients ul li img{display:block;width:auto;opacity:.82;transition:opacity .3s}.clients ul li img:hover{opacity:1}
 
 /* reveals */
 [data-r]{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.75,.15,1),transform 1s cubic-bezier(.2,.75,.15,1)}
@@ -328,7 +328,7 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
 <div class="clients">
   <div class="w">
     <p>Ils nous ont fait confiance</p>
-    <div class="track"><ul><li>AMBIA</li><li>Les Salons de la Lys</li><li>JL Transports</li><li>L'Atelier du Smartphone</li><li>Trésors de Guyane</li><li>AMBIANCE</li><li aria-hidden="true">AMBIA</li><li aria-hidden="true">Les Salons de la Lys</li><li aria-hidden="true">JL Transports</li><li aria-hidden="true">L'Atelier du Smartphone</li><li aria-hidden="true">Trésors de Guyane</li><li aria-hidden="true">AMBIANCE</li></ul></div>
+    <div class="track"><ul><li><img src="/assets/clients/ambia.png" alt="AMBIA" style="height:34px"></li><li><img src="/assets/clients/lys.png" alt="Les Salons de la Lys" style="height:24px"></li><li><img src="/assets/clients/jl.png" alt="JL Transports" style="height:42px"></li><li><img src="/assets/clients/atelier.png" alt="L'Atelier du Smartphone" style="height:26px"></li><li><img src="/assets/clients/famo.png" alt="FAMO Seafood" style="height:30px"></li><li><img src="/assets/clients/fitanubian.png" alt="FITANUBIAN" style="height:40px"></li><li aria-hidden="true"><img src="/assets/clients/ambia.png" alt="" style="height:34px"></li><li aria-hidden="true"><img src="/assets/clients/lys.png" alt="" style="height:24px"></li><li aria-hidden="true"><img src="/assets/clients/jl.png" alt="" style="height:42px"></li><li aria-hidden="true"><img src="/assets/clients/atelier.png" alt="" style="height:26px"></li><li aria-hidden="true"><img src="/assets/clients/famo.png" alt="" style="height:30px"></li><li aria-hidden="true"><img src="/assets/clients/fitanubian.png" alt="" style="height:40px"></li></ul></div>
   </div>
 </div>
 
@@ -391,7 +391,6 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
         <span class="kind">Café-boutique à Tétouan</span>
         <h3>AMBIA</h3>
         <p>Café, boutique, wellness et ateliers sous le même toit, encaissés et suivis dans un seul outil depuis l'ouverture.</p>
-        <!-- TÉMOIGNAGE À FAIRE VALIDER avant mise en ligne -->
         <blockquote>« Avant l'ouverture, on n'avait aucun outil. Aujourd'hui, la caisse, le site et le suivi des ventes sont au même endroit, et chaque soir je sais ce qu'on a vendu, activité par activité. »<cite>Asma, gérante d'AMBIA</cite></blockquote>
       </div>
     </article>
@@ -409,8 +408,23 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
         <h3>Les Salons de la Lys</h3>
         <p>Bien plus qu'un site : un outil qui gère toute l'activité. La demande arrive en ligne, se suit dans le tableau de bord, devient un devis PDF en un clic, puis le matériel est réservé dans l'inventaire et l'événement s'affiche au calendrier.</p>
         <ul class="did"><li>Demandes en ligne</li><li>Devis PDF</li><li>Inventaire du matériel</li><li>Calendrier des événements</li></ul>
-        <!-- TÉMOIGNAGE À FAIRE VALIDER avant mise en ligne -->
         <blockquote>« Toutes les demandes arrivent au même endroit, et je sors un devis propre en quelques secondes. L'administratif ne me prend plus mes soirées. »<cite>Les Salons de la Lys</cite></blockquote>
+      </div>
+    </article>
+
+        <article class="case last">
+      <div class="vis real" data-r>
+        <figure class="stack">
+          <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>Portail équipe, FAMO Seafood</span></div><img src="/assets/work/famo/team-bestellingen.webp" alt="Portail équipe FAMO : commandes du jour"></div>
+          <div class="pdf"><img src="/assets/work/famo/klant-catalogus.webp" alt="Portail client FAMO : catalogue et prix"></div>
+          <figcaption>Interface réelle, données de démonstration</figcaption>
+        </figure>
+      </div>
+      <div>
+        <span class="kind">Grossiste en produits de la mer à Anvers</span>
+        <h3>FAMO Seafood</h3>
+        <p>Un portail B2B complet en trois espaces. Les clients commandent en ligne à leurs prix négociés. L'équipe prépare, livre et suit chaque commande. La direction gère produits, prix, stock et documents : bons de livraison, factures et avoirs générés automatiquement.</p>
+        <ul class="did"><li>Portail client</li><li>Commandes et livraisons</li><li>Stock</li><li>Factures automatiques</li></ul>
       </div>
     </article>
 
@@ -420,7 +434,7 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
     </div>
     <div class="sites" data-r>
       <a href="https://ambiancemorocco.com" target="_blank" rel="noopener"><div class="frame"><div class="chrome"><i></i><i></i><i></i><span>ambiancemorocco.com</span></div><img src="/assets/work/ambiance/site.webp" alt="Site d'AMBIANCE, retraite à Marrakech"></div>
-        <h3>AMBIANCE</h3><p>Site d'une retraite pilates et sophrologie à Marrakech : concept, séjour, tarifs, réservation.</p></a>
+        <h3>ambiancemorocco.com</h3><p>Pour AMBIA, le site d'une retraite pilates et sophrologie à Marrakech : concept, séjour, tarifs, réservation.</p></a>
       <a href="https://ambia.ma" target="_blank" rel="noopener"><div class="frame"><div class="chrome"><i></i><i></i><i></i><span>ambia.ma</span></div><img src="/assets/work/ambia/booking-site-desktop.webp" alt="Site d'AMBIA, réservation des séances"></div>
         <h3>ambia.ma</h3><p>Planning de la semaine et réservation des séances de wellness en moins d'une minute.</p></a>
       <div><div class="frame"><div class="chrome"><i></i><i></i><i></i><span>Bonus Réparation</span></div><img src="/assets/work/atelier-du-smartphone/bonus-reparation.webp" alt="Outil Bonus Réparation de L'Atelier du Smartphone"></div>
