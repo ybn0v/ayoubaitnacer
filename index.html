@@ -190,28 +190,27 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
   animation:grain 1.2s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
-/* intro */
-#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse 60% 50% at 50% 45%,#16301f 0%,var(--forest) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(36px,6vh,64px);perspective:1100px;transition:opacity .9s cubic-bezier(.7,0,.2,1),visibility .9s}
-#intro.out{opacity:0;visibility:hidden}
+/* intro 3D */
+#intro{position:fixed;inset:0;z-index:100;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 42%,#14281e 0%,#0a120e 62%,#070c0a 100%);transition:opacity 1s cubic-bezier(.7,0,.2,1),visibility 1s,filter 1s}
+#intro.out{opacity:0;visibility:hidden;filter:blur(8px)}
 html:not(.intro-on) #intro{display:none}
-.logo3d{position:relative;width:min(62vw,440px);aspect-ratio:480/180;transform-style:preserve-3d;animation:spin 9s cubic-bezier(.45,0,.55,1) infinite}
-.logo3d img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:visible;-webkit-user-drag:none;user-select:none}
-.logo3d img.side{filter:brightness(.32) saturate(.6)}
-.logo3d img.front{filter:drop-shadow(0 0 24px rgba(16,185,129,.25))}
-@keyframes spin{0%{transform:rotateX(8deg) rotateY(-28deg)}50%{transform:rotateX(-4deg) rotateY(332deg)}100%{transform:rotateX(8deg) rotateY(332deg)}}
-#intro.out .logo3d{animation:none;transform:translateZ(500px) rotateY(0);transition:transform .9s cubic-bezier(.7,0,.2,1)}
-.floor{position:absolute;left:50%;top:calc(50% + min(16vw,120px));width:min(56vw,400px);height:30px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(16,185,129,.28),transparent 70%);filter:blur(6px);animation:pulse 4.5s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.45;transform:translateX(-50%) scaleX(.7)}}
-.intro-copy{text-align:center;opacity:0;animation:rise .9s .5s cubic-bezier(.2,.7,.2,1) forwards}
-.intro-copy p{color:var(--sage);font-size:1.02rem;margin-bottom:26px}
-.enter{position:relative;overflow:hidden;font:500 1rem "DM Sans",sans-serif;color:var(--forest);background:var(--emerald);border:2px solid var(--emerald);padding:16px 42px;cursor:pointer;box-shadow:5px 5px 0 var(--cream);transition:transform .15s,box-shadow .15s}
-.enter:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--cream)}
-.enter::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);animation:shine 2.8s 1.4s infinite}
-@keyframes shine{40%,100%{transform:translateX(120%)}}
-.intro-bar{position:absolute;bottom:0;left:0;height:3px;background:var(--emerald);width:0;animation:bar 7s linear forwards}
-@keyframes bar{to{width:100%}}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+#intro .fallback{position:absolute;left:50%;top:42%;width:min(60vw,420px);transform:translate(-50%,-50%);opacity:0;transition:opacity 1.2s}
+#intro.nogl .fallback{opacity:1}
+.intro-ui{position:absolute;left:0;right:0;bottom:clamp(56px,13vh,140px);display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:0 20px}
+.ops{display:flex;align-items:center;gap:18px;color:var(--emerald);font:500 .95rem "DM Mono",monospace;letter-spacing:1.4em;padding-left:1.4em;opacity:0;animation:opsIn 1.6s 1.7s cubic-bezier(.2,.75,.15,1) forwards}
+.ops i{display:block;height:1px;width:0;background:var(--emerald);animation:lineIn 1.2s 2s cubic-bezier(.2,.75,.15,1) forwards}
+@keyframes opsIn{from{opacity:0;letter-spacing:.2em}to{opacity:1;letter-spacing:1.4em}}
+@keyframes lineIn{to{width:clamp(40px,8vw,90px)}}
+.intro-ui p{color:var(--sage);font-size:1rem;opacity:0;animation:rise 1s 2.3s cubic-bezier(.2,.75,.15,1) forwards}
+.enter{position:relative;font:500 .95rem "DM Sans",sans-serif;letter-spacing:.04em;color:var(--cream);background:transparent;border:1px solid rgba(239,233,220,.35);padding:15px 46px;cursor:pointer;opacity:0;animation:rise 1s 2.6s cubic-bezier(.2,.75,.15,1) forwards;transition:color .4s,border-color .4s;overflow:hidden}
+.enter span{position:relative;z-index:1}
+.enter::before{content:"";position:absolute;inset:0;background:var(--emerald);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.enter:hover{color:var(--forest);border-color:var(--emerald)}
+.enter:hover::before{transform:scaleX(1)}
+.intro-skip{position:absolute;top:22px;right:24px;color:var(--sage);font-size:.85rem;background:none;border:0;cursor:pointer;opacity:0;animation:rise 1s 3s forwards}
+.intro-skip:hover{color:var(--cream)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 /* hero entrance (après l'intro) */
 .hero h1 .ln{display:block;overflow:hidden}
 .hero h1 .ln>span{display:block;transform:translateY(105%)}
@@ -262,7 +261,7 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
 
 @media (prefers-reduced-motion:reduce){
   #intro{display:none!important} html.intro-on body{overflow:auto}
-  body::after,.logo3d,.clients ul,.enter::after{animation:none}
+  body::after,.clients ul{animation:none}
   [data-r],.vis[data-r]{opacity:1;transform:none;clip-path:none;transition:none}
   .hero h1 .ln>span,.hero .fade{transform:none;opacity:1}
   nav{opacity:1}
@@ -275,14 +274,15 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
 </head>
 <body>
 <script>try{if(!sessionStorage.getItem('aan-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-on')}catch(e){}</script>
-<div id="intro" aria-hidden="false">
-  <div class="logo3d" aria-label="AANOPS"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-1px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-2px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-3px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-4px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-5px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-6px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-7px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-8px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-9px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-10px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-11px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-12px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-13px)"><img class="side" src="/assets/logo-aanops.png" alt="" style="transform:translateZ(-14px)"><img class="front" src="/assets/logo-aanops.png" alt="AANOPS"></div>
-  <div class="floor"></div>
-  <div class="intro-copy">
+<div id="intro">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <img class="fallback" src="/assets/logo-aanops.png" alt="AANOPS">
+  <button class="intro-skip" data-enter>Passer</button>
+  <div class="intro-ui">
+    <div class="ops" aria-hidden="true"><i></i>OPS<i></i></div>
     <p>Les systèmes derrière les entreprises qui tournent.</p>
-    <button class="enter" id="enter">Entrer</button>
+    <button class="enter" data-enter><span>Entrer</span></button>
   </div>
-  <div class="intro-bar"></div>
 </div>
 <div id="progress"></div>
 
@@ -480,18 +480,24 @@ nav.scrolled{background:rgba(12,22,18,.82);backdrop-filter:blur(14px);-webkit-ba
 
 <script>
 (function(){
-  var root=document.documentElement, intro=document.getElementById('intro'), done=false;
+  var root=document.documentElement, intro=document.getElementById('intro'), done=false, gl=null;
   function ready(){ document.body.classList.add('ready') }
   function enter(){
     if(done) return; done=true;
     try{sessionStorage.setItem('aan-intro','1')}catch(e){}
-    intro.classList.add('out');
-    setTimeout(function(){ root.classList.remove('intro-on'); ready(); intro.setAttribute('aria-hidden','true') },650);
+    if(gl) gl.leave();
+    setTimeout(function(){ intro.classList.add('out') },350);
+    setTimeout(function(){ root.classList.remove('intro-on'); ready(); intro.setAttribute('aria-hidden','true') },900);
+    setTimeout(function(){ if(gl) gl.stop(); intro.remove() },1600);
   }
   if(root.classList.contains('intro-on')){
-    document.getElementById('enter').addEventListener('click',enter);
-    document.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '||e.key==='Escape') enter() });
-    setTimeout(enter,7000);
+    document.querySelectorAll('[data-enter]').forEach(function(b){ b.addEventListener('click',enter) });
+    document.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key==='Escape') enter() });
+    import('/assets/intro.min.js').then(function(m){
+      gl=m.startIntro(document.getElementById('gl'));
+      if(!gl) intro.classList.add('nogl');
+    }).catch(function(){ intro.classList.add('nogl') });
+    setTimeout(enter,9000);
   } else { requestAnimationFrame(ready) }
 
   // nav + barre de progression
