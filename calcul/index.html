@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combien vous coûte votre administratif ? — AANOPS</title>
+<meta name="description" content="4 questions, 30 secondes : calculez le temps et l'argent que vos devis, factures et relances vous coûtent chaque année.">
+<meta name="theme-color" content="#0c1612">
+<link rel="canonical" href="https://aanops.com/calcul/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AANOPS">
+<meta property="og:url" content="https://aanops.com/calcul/">
+<meta property="og:title" content="Combien vous coûte votre administratif ?">
+<meta property="og:description" content="4 questions, 30 secondes. Le résultat risque de vous surprendre.">
+<meta property="og:image" content="https://aanops.com/assets/og-aanops.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#0c1612;--forest-2:#122019;--rule:#22332b;--cream:#efe9dc;--sage:#8d9a93;--emerald:#10b981;--ink:#16130f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--forest);color:var(--cream);font-family:"DM Sans",system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--emerald);outline-offset:3px}
+.w{max-width:1100px;margin:0 auto;padding:0 20px}
+h1,h2{font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.98}
+.tag{font-family:"DM Mono",monospace;font-size:.78rem;letter-spacing:.14em;color:var(--emerald);text-transform:uppercase}
+.btn{display:inline-block;font-weight:500;font-size:1rem;padding:16px 26px;border:2px solid var(--emerald);background:var(--emerald);color:var(--forest);box-shadow:5px 5px 0 var(--cream);transition:transform .15s,box-shadow .15s;text-align:center}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--cream)}
+.link{border-bottom:2px solid var(--rule);padding-bottom:2px;color:var(--sage);transition:border-color .15s,color .15s}
+.link:hover{border-color:var(--cream);color:var(--cream)}
+
+nav{padding:26px 0}
+nav .w{display:flex;align-items:center;justify-content:space-between;gap:20px}
+nav img{height:34px;width:auto;display:block}
+
+header{padding:40px 0 56px}
+header h1{font-size:clamp(2.4rem,6.6vw,5rem);max-width:15ch;margin:18px 0 22px}
+header p{color:var(--sage);font-size:1.15rem;max-width:46ch}
+
+.grid{display:grid;gap:40px;padding-bottom:110px}
+@media(min-width:940px){.grid{grid-template-columns:1.05fr .95fr;align-items:start}}
+
+.q{border-top:2px solid var(--rule);padding:26px 0}
+.q:last-child{border-bottom:2px solid var(--rule)}
+.q label{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-weight:500;font-size:1.05rem}
+.q label output{font-family:"Syne";font-weight:800;font-size:1.6rem;color:var(--emerald);white-space:nowrap;letter-spacing:-.02em}
+.q small{display:block;color:var(--sage);font-size:.9rem;margin-top:2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:14px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:4px;background:var(--rule)}
+input[type=range]::-moz-range-progress{height:4px;background:var(--emerald)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;background:var(--cream);border:2px solid var(--emerald);box-shadow:3px 3px 0 var(--emerald)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:0;background:var(--cream);border:2px solid var(--emerald);box-shadow:3px 3px 0 var(--emerald)}
+
+.res{background:var(--cream);color:var(--ink);padding:34px 30px 32px;box-shadow:8px 8px 0 var(--emerald)}
+@media(min-width:940px){.res{position:sticky;top:24px}}
+.res .tag{color:#0b7a55}
+.big{font-family:"Syne";font-weight:800;font-size:clamp(3rem,8vw,4.6rem);letter-spacing:-.04em;line-height:1;margin:14px 0 4px}
+.big-sub{font-size:1.05rem;color:#4f4a40}
+.rows{margin:26px 0;border-top:1px dashed #9d978a}
+.row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed #9d978a;font-family:"DM Mono",monospace;font-size:.92rem}
+.row b{font-family:"Syne";font-weight:800;font-size:1.15rem;letter-spacing:-.01em;white-space:nowrap}
+.row.hl b{color:#0b7a55}
+.res .note{font-size:.82rem;color:#6b6558;line-height:1.5;margin-bottom:24px}
+.res .btn{display:block;box-shadow:5px 5px 0 var(--ink)}
+.res .btn:hover{box-shadow:7px 7px 0 var(--ink)}
+.res .alt{display:block;text-align:center;margin-top:18px;font-size:.92rem;color:#4f4a40;text-decoration:underline;text-underline-offset:3px}
+
+footer{border-top:2px solid var(--rule);padding:30px 0;color:var(--sage);font-size:.9rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="w">
+    <a href="/" aria-label="AANOPS, accueil"><img src="/assets/logo-aanops.png" alt="AANOPS"></a>
+    <a class="link" href="/">Voir le site</a>
+  </div>
+</nav>
+
+<header>
+  <div class="w">
+    <p class="tag">// Calculateur · 30 secondes</p>
+    <h1 id="titre">Combien vous coûte votre administratif&nbsp;?</h1>
+    <p>Devis, factures, relances, papiers : ce temps-là ne se voit pas, mais il se paie. Bougez les curseurs, le résultat s'affiche tout seul.</p>
+  </div>
+</header>
+
+<main class="w grid">
+  <form id="f" onsubmit="return false">
+    <div class="q">
+      <label for="devis">Devis faits par mois <output id="o-devis"></output></label>
+      <input type="range" id="devis" min="0" max="100" step="1" value="15">
+    </div>
+    <div class="q">
+      <label for="tdevis">Temps moyen pour un devis <output id="o-tdevis"></output></label>
+      <small>Prise d'infos, calcul, mise en page, envoi.</small>
+      <input type="range" id="tdevis" min="5" max="120" step="5" value="30">
+    </div>
+    <div class="q">
+      <label for="fact">Factures et relances par mois <output id="o-fact"></output></label>
+      <small>Comptez environ 15 min par facture, relances comprises.</small>
+      <input type="range" id="fact" min="0" max="100" step="1" value="15">
+    </div>
+    <div class="q">
+      <label for="autre">Autre administratif par semaine <output id="o-autre"></output></label>
+      <small>Saisie, planning, recherche de documents, appels de suivi.</small>
+      <input type="range" id="autre" min="0" max="20" step="1" value="3">
+    </div>
+    <div class="q">
+      <label for="taux">Ce que vaut une heure de votre travail <output id="o-taux"></output></label>
+      <small>Votre taux horaire facturé, ou ce que vous rapporte une heure sur le terrain.</small>
+      <input type="range" id="taux" min="20" max="120" step="5" value="45">
+    </div>
+  </form>
+
+  <aside class="res" aria-live="polite">
+    <p class="tag">// Votre résultat</p>
+    <p class="big" id="r-an">0 €</p>
+    <p class="big-sub">par an, passés sur l'administratif au lieu de votre métier.</p>
+    <div class="rows">
+      <div class="row"><span>Par semaine</span><b id="r-hsem">0 h</b></div>
+      <div class="row"><span>Par an</span><b id="r-han">0 h</b></div>
+      <div class="row"><span>Soit</span><b id="r-sem">0 semaines de 35 h</b></div>
+      <div class="row hl"><span>Récupérable (hypothèse : la moitié)</span><b id="r-gain">0 €</b></div>
+    </div>
+    <p class="note">Calcul sur 47 semaines travaillées. L'hypothèse « la moitié » est une estimation prudente : la part réellement automatisable dépend de votre activité, c'est l'objet du diagnostic.</p>
+    <a class="btn" id="cta" href="https://wa.me/33617933974" target="_blank" rel="noopener">Diagnostic gratuit de 30 min</a>
+    <a class="alt" id="cta-mail" href="mailto:ayoub@aanops.com">ou répondre par email</a>
+  </aside>
+</main>
+
+<footer>
+  <div class="w">AANOPS, les systèmes derrière les entreprises qui tournent. Aucune donnée saisie ici n'est enregistrée.</div>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id) };
+  var eur = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
+  var one = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+  var SEMAINES = 47, MIN_FACTURE = 15, SEM_MOIS = 52 / 12;
+
+  // Titre personnalisé depuis le mail : ?metier=couvreur → "Couvreurs : combien vous coûte…"
+  try {
+    var m = new URLSearchParams(location.search).get('metier');
+    if (m && /^[\p{L} '\-]{2,30}$/u.test(m)) {
+      m = m.trim();
+      var pl = /[sxz]$/i.test(m) ? m : m + 's';
+      $('titre').textContent = pl.charAt(0).toUpperCase() + pl.slice(1) + ' : combien vous coûte votre administratif ?';
+    }
+  } catch (e) {}
+
+  function v(id){ return +$(id).value }
+  function calc(){
+    $('o-devis').textContent = v('devis');
+    $('o-tdevis').textContent = v('tdevis') + ' min';
+    $('o-fact').textContent = v('fact');
+    $('o-autre').textContent = v('autre') + ' h';
+    $('o-taux').textContent = v('taux') + ' €';
+
+    var hMois = (v('devis') * v('tdevis') + v('fact') * MIN_FACTURE) / 60;
+    var hSem = hMois / SEM_MOIS + v('autre');
+    var hAn = hSem * SEMAINES;
+    var euros = hAn * v('taux');
+
+    $('r-an').textContent = eur.format(Math.round(euros / 100) * 100) + ' €';
+    $('r-hsem').textContent = one.format(hSem) + ' h';
+    $('r-han').textContent = eur.format(hAn) + ' h';
+    $('r-sem').textContent = one.format(hAn / 35) + ' semaines de 35 h';
+    $('r-gain').textContent = eur.format(Math.round(euros / 200) * 100) + ' €';
+
+    var msg = 'Bonjour Ayoub, j\'ai fait le calcul sur aanops.com : environ ' + one.format(hSem) +
+      ' h par semaine d\'administratif, soit ' + eur.format(Math.round(euros / 100) * 100) +
+      ' € par an. Je veux bien un diagnostic gratuit.';
+    $('cta').href = 'https://wa.me/33617933974?text=' + encodeURIComponent(msg);
+    $('cta-mail').href = 'mailto:ayoub@aanops.com?subject=' + encodeURIComponent('Mon calcul AANOPS') + '&body=' + encodeURIComponent(msg);
+  }
+  $('f').addEventListener('input', calc);
+  calc();
+})();
+</script>
+</body>
+</html>
